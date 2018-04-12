@@ -1,0 +1,16 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree %}
+
+{% block title %}
+    Game {{game_number}}
+{% endblock %}
+
+{% block content %}
+
+{% formfield player.tg2 %}
+
+{% next_button %}
+
+{% include Constants.tgInstructions %}
+
+{% endblock %}

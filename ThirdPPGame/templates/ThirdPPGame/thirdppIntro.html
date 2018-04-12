@@ -1,0 +1,17 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree %}
+
+{% block title %}
+    Game {{game_number}}
+{% endblock %}
+
+{% block content %}
+
+<p>
+    Please read the following instructions carefully.
+</p>
+
+{% include Constants.thirdppInstructions %}
+
+{% next_button %}
+{% endblock %}

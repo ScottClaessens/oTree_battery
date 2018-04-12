@@ -1,0 +1,30 @@
+{% load otree staticfiles %}
+
+<div class="instructions well well-lg">
+
+    <h3 class="panel-sub-heading">
+        Instructions
+    </h3>
+    <p>
+        In this interaction you are matched with one other brand new person.
+    </p>
+    <p>
+        One of you will be person A, one of you will be person B.
+    </p>
+    <p>
+        Person A starts with 100 points and person B starts with 0.
+    </p>
+    <p>
+        First person A makes a choice, then person B responds.
+    </p>
+    <ol>
+        <li>Person A will make an offer on how to split the 100 points with person B. </li>
+        <li>Person B will either accept or reject this offer. If person B accepts, then B will get the offered amount
+            and A will keep the rest. If B rejects the offer then both individuals will get 0 points.</li>
+    </ol>
+    <p>
+        The graphic below shows a summary of the interaction:
+    </p>
+    <img src="{% static "UltimatumGame/ug.JPG" %}" width="{{ 500 }}"/>
+</div>
+

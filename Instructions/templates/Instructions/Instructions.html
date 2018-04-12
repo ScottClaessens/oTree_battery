@@ -1,0 +1,44 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree %}
+
+{% block title %}
+    General Instructions
+{% endblock %}
+
+{% block content %}
+<p>
+    PLEASE READ THESE INSTRUCTIONS CAREFULLY!  Thank you for participating in our study.
+</p>
+<p>
+    We are interested in how people make decisions that affect the payoffs of themselves and other people. During the
+    course of this study, you can earn up to an extra $3.
+</p>
+<p>
+    In this study, you will be asked to take part in a series of interactions. In each interaction you will be matched
+    with one or more other people recruited from Mechanical Turk. Each interaction will have you matched with different
+    people. The payoffs for each interaction will be given in points, every point will be worth 1.5 cent at the end of
+    the study - so an interaction for 100 points has $1.50 at stake. The rules for each interaction will be different,
+    so please read the instructions carefully!
+</p>
+<p>
+    Some interactions will have different "roles" for different participants. We will ask you what you would like to do
+    in each possible role.
+</p>
+<p>
+    We don't want what happens in one interaction to affect your decisions in another. So at the end of the study we
+    will randomly choose one interaction and use its outcomes to determine your bonus payment. If that interaction had
+    multiple roles, we'll assign you to a role randomly.
+</p>
+<p>
+    Thus, because only one interaction will count, but you don't know which one it will be, it is in your best interest
+    to treat each decision as if it is the only one that matters for your final payoffs.
+</p>
+<p>
+    We're interested in your choices, and we're not interested in "tricking" you in any way. If you see anything out of
+    place or if something doesn't make sense, please let us know by e-mail as it is most likely a bug in the software.
+</p>
+<p>
+    When you are ready for the first interaction, click NEXT to continue.
+</p>
+{% next_button %}
+{% endblock %}

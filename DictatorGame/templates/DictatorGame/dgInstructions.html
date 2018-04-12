@@ -1,0 +1,29 @@
+{% load otree staticfiles %}
+
+<div class="instructions well well-lg">
+
+    <h3 class="panel-sub-heading">
+        Instructions
+    </h3>
+    <p>
+        In this interaction you are matched with one other brand new person.
+    </p>
+    <p>
+        One of you will be person A, one of you will be person B.
+    </p>
+    <p>
+        Person A starts with 100 points and person B starts with 0.
+    </p>
+    <p>
+        This interaction has one single decision:
+    </p>
+    <ol>
+        <li>Person A will choose how many of the 100 points to transfer to person B.</li>
+        <li>Person B will get the number of points A transfers and A will get to keep the rest.</li>
+    </ol>
+    <p>
+        The graphic below shows a summary of the interaction:
+    </p>
+    <img src="{% static "DictatorGame/dg.JPG" %}" width="{{ 500 }}"/>
+</div>
+

@@ -1,0 +1,30 @@
+{% load otree staticfiles %}
+
+<div class="instructions well well-lg">
+
+    <h3 class="panel-sub-heading">
+        Instructions
+    </h3>
+    <p>
+        In this interaction you are matched with one other brand new person.
+    </p>
+    <p>
+        One of you will be person A, one of you will be person B.
+    </p>
+    <p>
+        Both of you start with 50 points.
+    </p>
+    <p>
+        First, person A makes a choice, then person B responds.
+    </p>
+    <ol>
+        <li>Person A can choose to transfer their 50 points or not. If person A transfers 50 points then it is TRIPLED
+        and given to person B (so person B now has 200 points).</li>
+        <li>Person B can then choose how many of the points they want to transfer back to person A (between 0 and 150).</li>
+    </ol>
+    <p>
+        The graphic below shows a summary of the interaction:
+    </p>
+    <img src="{% static "TrustGame/tg.JPG" %}" width="{{ 500 }}"/>
+</div>
+

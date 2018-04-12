@@ -1,0 +1,16 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree %}
+
+{% block title %}
+    Game {{game_number}}
+{% endblock %}
+
+{% block content %}
+
+{% formfield player.apa %}
+
+{% next_button %}
+
+{% include Constants.apaInstructions %}
+
+{% endblock %}

@@ -1,0 +1,34 @@
+{% load otree staticfiles %}
+
+<div class="instructions well well-lg">
+
+    <h3 class="panel-sub-heading">
+        Instructions
+    </h3>
+    <p>
+        In this interaction you are matched with two other brand new people.
+    </p>
+    <p>
+        One of you will be person A, one of you will be person B, one of you will be person C.
+    </p>
+    <p>
+        All individuals start with 100 points.
+    </p>
+    <p>
+        First, person A makes a choice, then person C responds.
+    </p>
+    <ol>
+        <li>Person A can choose to take or not take from person B.</li>
+        <li>If A takes, person B loses 50 points and A gains 30 points.</li>
+        <li>If A takes, then C can choose to remove points from A. C can remove up to 100 points from A.</li>
+    </ol>
+    <p>
+        C must pay 1 point for every 5 points they remove from A. Person B is passive in this interaction and
+        makes no decisions.
+    </p>
+    <p>
+        The graphic below shows a summary of the interaction:
+    </p>
+    <img src="{% static "ThirdPPGame/3pp.JPG" %}" width="{{ 500 }}"/>
+</div>
+
