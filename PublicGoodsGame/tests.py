@@ -7,4 +7,6 @@ from .models import Constants
 
 class PlayerBot(Bot):
     def play_round(self):
-        pass
+        yield (pages.pggIntro)
+        yield (pages.pggComp, {'comprehension': 1})
+        yield (pages.pggDecision, {'pgg': c(random.randint(1,100))})

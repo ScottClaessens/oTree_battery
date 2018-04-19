@@ -17,7 +17,50 @@ class Constants(BaseConstants):
 
 
 class Subsession(BaseSubsession):
-    pass
+    def creating_session(self):
+        for p in self.get_players():
+            # Dictator Game
+            p.participant.vars['matching_dg_role'] = None
+            p.participant.vars['matching_dg_transfer_to_me'] = None
+            p.participant.vars['matching_dg_payoff'] = None
+            p.participant.vars['dg'] = None
+            # Ultimatum Game
+            p.participant.vars['matching_ug_role'] = None
+            p.participant.vars['matching_ug_mao'] = None
+            p.participant.vars['matching_ug_offer'] = None
+            p.participant.vars['matching_ug_reject'] = None
+            p.participant.vars['matching_ug_payoff'] = None
+            p.participant.vars['ug1'] = None
+            p.participant.vars['ug2'] = None
+            # Trust Game
+            p.participant.vars['matching_tg_role'] = None
+            p.participant.vars['matching_tg_give'] = None
+            p.participant.vars['matching_tg_return'] = None
+            p.participant.vars['matching_tg_payoff'] = None
+            p.participant.vars['tg1'] = None
+            p.participant.vars['tg2'] = None
+            # Second-Party Punishment Game
+            p.participant.vars['matching_2pp_pd'] = None
+            p.participant.vars['matching_2pp_puncoop'] = None
+            p.participant.vars['matching_2pp_pundef'] = None
+            p.participant.vars['matching_2pp_payoff'] = None
+            p.participant.vars['secondpp1'] = None
+            p.participant.vars['secondpp2'] = None
+            p.participant.vars['secondpp3'] = None
+            # Third-Party Punishment Game
+            p.participant.vars['matching_3pp_role'] = None
+            p.participant.vars['matching_3pp_take'] = None
+            p.participant.vars['matching_3pp_punishment'] = None
+            p.participant.vars['matching_tg_payoff'] = None
+            p.participant.vars['thirdpp1'] = None
+            p.participant.vars['thirdpp2'] = None
+            # Public Goods Game
+            p.participant.vars['matching_pgg_cont1'] = None
+            p.participant.vars['matching_pgg_cont2'] = None
+            p.participant.vars['matching_pgg_cont3'] = None
+            p.participant.vars['matching_pgg_payoff'] = None
+            p.participant.vars['pgg'] = None
+
 
 
 class Group(BaseGroup):

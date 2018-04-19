@@ -16,9 +16,9 @@ from django.core.urlresolvers import reverse
 
 
 def get_new_sequence_of_apps(app_sequence):
-    the_rest = app_sequence[1:]
+    the_rest = app_sequence[1:8]
     random.shuffle(the_rest)
-    app_sequence = [app_sequence[0]] + the_rest
+    app_sequence = [app_sequence[0]] + the_rest + [app_sequence[8]]
     return app_sequence
 
 
@@ -63,20 +63,32 @@ def build_participant_to_player_lookups(participant, subsession_app_names):
             participant.save()
         ParticipantToPlayerLookup.objects.bulk_create(records_to_create)
 
-class Instructions(Page):
+
+class Consent(Page):
     def is_displayed(self):
-        print('OLD APP SEQ', self.participant.session.config['app_sequence'])
-        if not self.player.sequence_of_apps:
-            print('SETTING A NEW RANDOM SEQUENCE...')
-            ParticipantToPlayerLookup.objects.filter(participant=self.participant).delete()
-            self.player.sequence_of_apps = get_new_sequence_of_apps(self.session.config['app_sequence'])
-            build_participant_to_player_lookups(self.participant, self.player.sequence_of_apps)
+        if self.session.config['randomisation'] is True:
+            print('OLD APP SEQ', self.participant.session.config['app_sequence'])
+            if not self.player.sequence_of_apps:
+                print('SETTING A NEW RANDOM SEQUENCE...')
+                ParticipantToPlayerLookup.objects.filter(participant=self.participant).delete()
+                sequence_of_apps = get_new_sequence_of_apps(self.session.config['app_sequence'])
+                self.participant.vars['sequence_of_apps'] = sequence_of_apps
+                self.player.sequence_of_apps = sequence_of_apps
+                build_participant_to_player_lookups(self.participant, self.player.sequence_of_apps)
+        else:
+            self.participant.vars['sequence_of_apps'] = self.session.config['app_sequence']
+            self.player.sequence_of_apps = self.session.config['app_sequence']
         return True
 
     def before_next_page(self):
         self.participant.vars['game_number'] = 1
 
 
+class Instructions(Page):
+    pass
+
+
 page_sequence = [
+    Consent,
     Instructions,
 ]

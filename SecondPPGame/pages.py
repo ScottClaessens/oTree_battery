@@ -33,6 +33,9 @@ class secondpp2(Page):
 
     def before_next_page(self):
         self.participant.vars['game_number'] += 1
+        self.participant.vars['secondpp1'] = self.player.secondpp1
+        self.participant.vars['secondpp2'] = self.player.secondpp2
+        self.participant.vars['secondpp3'] = self.player.secondpp3
 
 
 page_sequence = [

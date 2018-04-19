@@ -59,7 +59,7 @@ AWS_SECRET_ACCESS_KEY = environ.get('AWS_SECRET_ACCESS_KEY')
 
 
 # e.g. EUR, CAD, GBP, CHF, CNY, JPY
-REAL_WORLD_CURRENCY_CODE = 'USD'
+REAL_WORLD_CURRENCY_CODE = 'NZD'
 USE_POINTS = True
 
 
@@ -115,7 +115,7 @@ mturk_hit_settings = {
 
 SESSION_CONFIG_DEFAULTS = {
     'real_world_currency_per_point': 0.00,
-    'participation_fee': 0.00,
+    'participation_fee': 20.00,
     'doc': "",
     'mturk_hit_settings': mturk_hit_settings,
 }
@@ -124,13 +124,13 @@ SESSION_CONFIGS = [
 
     {   'name': 'oTree_battery',
         'display_name': "Battery of Economic Games",
-        'num_demo_participants': 1,
+        'num_demo_participants': 8,
         'app_sequence': ['Instructions', 'TrustGame',
                          'PublicGoodsGame', 'UltimatumGame',
                          'DictatorGame', 'ThirdPPGame',
-                         'SecondPPGame', 'AllPayAuction',
-                         ],
+                         'SecondPPGame', 'Payoffs'],
         'use_browser_bots': False,
+        'randomisation': False
     }
 ]
 

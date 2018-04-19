@@ -26,7 +26,8 @@ class tg2(Page):
 
     def before_next_page(self):
         self.participant.vars['game_number'] += 1
-
+        self.participant.vars['tg1'] = self.player.tg1
+        self.participant.vars['tg2'] = self.player.tg2
 
 page_sequence = [
     tgIntro,

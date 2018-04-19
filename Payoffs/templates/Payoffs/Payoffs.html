@@ -1,0 +1,164 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Payoffs
+{% endblock %}
+
+{% block content %}
+
+<p>
+    Here's what you earned.
+</p>
+
+<br>
+
+{% for i in sequence_of_apps %}
+
+<p><u>Interaction {{forloop.counter}}</u></p>
+
+{% if i == "DictatorGame" %}
+<p>In this interaction, you were assigned the role of {{matching_dg_role}}.
+    {% if matching_dg_role == "Player A" %}You started with {{100|c}} and Player B started with nothing.
+    {% else %}Player A started with {{100|c}} and you started with nothing.{% endif %}</p>
+{% if matching_dg_role == "Player A" %}
+    <p>You transferred {{dg}} to Player B.</p>
+{% else %}
+    <p>Player A transferred {{matching_dg_transfer_to_me}} to you.</p>
+{% endif %}
+<p>Your payoff for this game was <b>{{matching_dg_payoff}}</b>.</p>
+
+{% elif i == "UltimatumGame" %}
+<p>In this interaction, you were assigned the role of {{matching_ug_role}}.
+    {% if matching_ug_role == "Player A" %}You started with {{100|c}} and Player B started with nothing.
+    {% else %}Player A started with {{100|c}} and you started with nothing.{% endif %}</p>
+{% if matching_ug_role == "Player A" %}
+    <p>You offered Player B {{ug1}}.
+    {% if matching_ug_reject %}However, Player B's minimum acceptable offer was {{matching_ug_mao}}, and so they
+    rejected your offer.
+    {% else %}Player B's minimum acceptable offer of {{matching_ug_mao}} was below this, and so they accepted
+    your offer.{% endif %}</p>
+{% else %}
+    <p>Player A offered you {{matching_ug_offer}}.
+    {% if matching_ug_reject %}However, your minimum acceptable offer was {{ug2}}, and so you rejected their offer.
+    {% else %}Your minimum acceptable offer of {{ug2}} was below this, and so you accepted their offer.{% endif %}</p>
+{% endif %}
+<p>Your payoff for this game was <b>{{matching_ug_payoff}}</b>.</p>
+
+{% elif i == "TrustGame" %}
+<p>In this interaction, you were assigned the role of {{matching_tg_role}}. Both players started with {{50|c}}.</p>
+{% if matching_tg_role == "Player A" %}
+    {% if tg1 == 1 %}
+    <p>You didn't transfer anything to Player B, and so Player B had nothing to send back.</p>
+    {% else %}
+    <p>You transferred your {{50|c}} to Player B, which was multiplied to {{150|c}}. Player B then sent back
+    {{matching_tg_return}}.</p>
+    {% endif %}
+{% else %}
+    {% if matching_tg_give == 1 %}
+    <p>Player A didn't transfer anything to you, and so you had nothing to send back.</p>
+    {% elif matching_tg_give == 2 %}
+    <p>Player A transferred their {{50|c}} to you, which was multiplied to {{150|c}}. You then sent back
+    {{tg2}}.</p>
+    {% endif %}
+{% endif %}
+<p>Your payoff for this game was <b>{{matching_tg_payoff}}</b>.</p>
+
+{% elif i == "SecondPPGame" %}
+<p>In this interaction, both players started with {{100|c}}.</p>
+{% if secondpp1 == 1 %}
+    {% if matching_2pp_pd == 1 %}
+        <p>In the initial transfer phase, both players transferred {{30|c}} to the other. These transfers were doubled
+            to {{60|c}}. At the end of the transfer stage, therefore, your payoff was {{130|c}}.</p>
+    {% elif matching_2pp_pd == 2 %}
+        <p>In the initial transfer phase, you transferred {{30|c}} but your partner did not. At the end of the transfer
+            stage, therefore, your payoff was {{70|c}}.</p>
+    {% endif %}
+{% else %}
+    {% if matching_2pp_pd == 1 %}
+        <p>In the initial transfer phase, your partner transferred {{30|c}} to you ((doubled to {{60|c}})),
+            but you did not transfer anything. At the end of the transfer stage, therefore, your payoff was
+            {{160|c}}.</p>
+    {% elif matching_2pp_pd == 2 %}
+        <p>In the initial transfer phase, neither player transferred points to the other.</p>
+    {% endif %}
+{% endif %}
+{% if matching_2pp_pd == 1 %}
+    {% if secondpp2 > 0 %}
+    <p>In the penalty phase, you removed {{secondpp2}} from your partner for their decision in the transfer phase.
+    This cost you {{secondpp2_cost}}.</p>
+    {% else %}
+    <p>You did not remove any points from your partner for their decision in the transfer phase.</p>
+    {% endif %}
+{% elif matching_2pp_pd == 2 %}
+    {% if secondpp3 > 0 %}
+    <p>In the penalty phase, you removed {{secondpp3}} from your partner for their decision in the transfer phase.
+    This cost you {{secondpp3_cost}}.</p>
+    {% else %}
+    <p>You did not remove any points from your partner for their decision in the transfer phase.</p>
+    {% endif %}
+{% endif %}
+{% if secondpp1 == 1 %}
+    {% if matching_2pp_puncoop > 0 %}
+    <p>Your partner also removed {{matching_2pp_puncoop}} from you.</p>
+    {% elif matching_2pp_puncoop == 0 %}
+    <p>Your partner did not remove any points from you.</p>
+    {% endif %}
+{% else %}
+    {% if matching_2pp_pundef > 0 %}
+    <p>Your partner also removed {{matching_2pp_pundef}} from you.</p>
+    {% elif matching_2pp_pundef == 0 %}
+    <p>Your partner did not remove any points from you.</p>
+    {% endif %}
+{% endif %}
+<p>Your payoff from both phases of this game was <b>{{matching_2pp_payoff}}</b>.</p>
+
+{% elif i == "ThirdPPGame" %}
+<p>In this interaction, you were assigned the role of {{matching_3pp_role}}. All players started with {{100|c}}.</p>
+{% if matching_3pp_role == "Player A" %}
+    {% if thirdpp1 == 1 %}
+    <p>You chose not to take any points from Player B. As a result, Player C did not remove any points from you.</p>
+    {% elif thirdpp1 == 2 %}
+    <p>You chose to take points from Player B. Player B lost {{50|c}} and you gained {{30|c}}.</p>
+        {% if matching_3pp_punishment > 0 %}
+        <p>As a result, Player C then removed {{matching_3pp_punishment}} from you.</p>
+        {% else %}
+        <p>However, Player C chose not to remove any points from you.</p>
+        {% endif %}
+    {% endif %}
+{% else %}
+    {% if matching_3pp_take == 1 %}
+    <p>Player A chose not to take any points from Player B. As a result, you did not remove any points from Player A.</p>
+    {% elif matching_3pp_take == 2 %}
+    <p>Player A chose to take points from Player B. Player B lost {{50|c}} and Player A gained {{30|c}}.</p>
+        {% if thirdpp2 > 0 %}
+        <p>As a result, you then removed {{thirdpp2}} from Player A. This cost you {{thirdpp2_cost}}.</p>
+        {% else %}
+        <p>However, you chose not to remove any points from Player B.</p>
+        {% endif %}
+    {% endif %}
+{% endif %}
+<p>Your payoff for this game was <b>{{matching_3pp_payoff}}</b>.</p>
+
+{% elif i == "PublicGoodsGame" %}
+<p>In this interaction, all four players started with {{100|c}}.</p>
+<p>You contributed {{pgg}} to the group project. The other group members contributed {{matching_pgg_cont1}},
+{{matching_pgg_cont2}}, and {{matching_pgg_cont3}}. The total number of points was doubled and divided evenly
+    between all players. This was added to your remaining points.</p>
+<p>Your payoff for this game was <b>{{matching_pgg_payoff}}</b>.</p>
+
+{% endif %}
+
+<br>
+
+{% endfor %}
+
+<p>
+    <b>Your overall payoff for the study was {{overall_payoff}}.</b>
+</p>
+
+{% next_button %}
+
+{% endblock %}
+
+

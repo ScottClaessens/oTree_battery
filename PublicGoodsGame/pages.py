@@ -28,6 +28,7 @@ class pggDecision(Page):
 
     def before_next_page(self):
         self.participant.vars['game_number'] += 1
+        self.participant.vars['pgg'] = self.player.pgg
 
 
 page_sequence = [

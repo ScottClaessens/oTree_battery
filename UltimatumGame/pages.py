@@ -33,6 +33,8 @@ class ug2(Page):
 
     def before_next_page(self):
         self.participant.vars['game_number'] += 1
+        self.participant.vars['ug1'] = self.player.ug1
+        self.participant.vars['ug2'] = self.player.ug2
 
 
 page_sequence = [

@@ -7,4 +7,7 @@ from .models import Constants
 
 class PlayerBot(Bot):
     def play_round(self):
-        pass
+        yield (pages.secondppIntro)
+        yield (pages.secondppComp, {'comprehension': 1})
+        yield (pages.secondpp1, {'secondpp1': random.randint(1,2)})
+        yield (pages.secondpp2, {'secondpp2': random.randint(1,70), 'secondpp3': random.randint(1,70)})

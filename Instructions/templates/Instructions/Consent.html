@@ -1,0 +1,112 @@
+{% extends "otree/Page.html" %}
+{% load otree_tags %}
+
+{% block title %}Welcome{% endblock %}
+
+{% block styles %}
+<style type="text/css">
+    .box {
+	width:100%;
+	height:100%;
+	background:#F5F5DC; /* biege color */
+	margin:20px auto;
+    padding: 10px 10px 10px 10px;
+}
+</style>
+{% endblock %}
+
+{% block content %}
+
+<p>
+    Welcome to the study <b>how people interact and make economic decisions in groups</b>. Please read the following
+    consent form carefully.
+</p>
+
+<br>
+
+<div class="box">
+
+    <div align="center">
+        <h3>
+            Consent Form
+        </h3>
+    </div>
+    <p>
+        You are invited to participate in this study because you are a participant in the New Zealand Attitudes and
+        Values Survey, and you have agreed to participate in an additional online study. You must be at least 18 years
+        old to participate.
+    </p>
+    <p>
+        The purpose of this project is to assess how economic decisions with others can predict attitudes and values.
+        You will complete a series of interactions with other real participants. The decisions you make in these
+        interactions will determine how much money you and they earn. The interactions are all slightly different, so
+        you must read the instructions carefully and answer a comprehension question before each one.
+    </p>
+    <p>
+        The entire study will take approximately one hour. For participating in the study, you will earn $20. However,
+        you can also earn a bonus payment on top of that amount ($25-30). The bonus payment you receive will depend on
+        your decisions in the interactions. Your total expected payment from the study is $45-50.
+    </p>
+    <p>
+        There are no known risks associated with this research. Participation in this study is voluntary. You may
+        withdraw from the study at any time.
+    </p>
+    <p>
+        For payment purposes, sensitive information will be asked from you at the end of this study. If your preferred
+        method of payment is PayPal, we will ask you for your email address. If your preferred method of payment is a
+        direct online bank transfer, we will ask you for your bank details. If your preferred method of payment is posted
+        cheque, we will ask you for your full name and postal address. This information will only be used for payment
+        purposes, and will be permanently deleted immediately after the payment is processed by the University of
+        Auckland. After payment, nothing will directly connect you to your name or contact details. Your participant
+        number will only be able to connect you to your previous NZAVS responses, which are anonymised.
+    </p>
+    <p>
+        The data from this study will be stored in an encrypted data file, which can only be accessed with a private
+        key stored on a separate computer. These data will be stored indefinitely for research purposes. The final
+        anonymous data file may be shared with other competent professionals on a case-by-case basis for research
+        purposes. Your data will be reported in a manner that makes it impossible for others to identify your responses.
+    </p>
+    <p>
+        If you have any questions or concerns about this study, please contact Dr Chris Sibley (Phone: 09 373 7599
+        ext. 87498; Email: nzavs@auckland.ac.nz) in the School of Psychology. You may also contact Dr William Hayward,
+        Head of the School of Psychology, by phone (09 373 75 99 ext. 88516) or email (w.hayward@auckland.ac.nz).
+    </p>
+    <p>
+        For any queries regarding ethical concerns, you may contact the Chair, The University of Auckland
+        Human Participants Ethics Committee, The University of Auckland, Office of the Vice Chancellor,
+        Private Bag 92019, Auckland 1142. Telephone: 09 373 75 99 ext. 83711.
+    </p>
+    <p>
+        Approved by the University of Auckland Human Participants Ethics Committee on XX-XX- XXXX for (3) years.
+        Protocol Number:
+    </p>
+
+</div>
+
+<br>
+
+<p>
+    By clicking Next, you understand that:
+<ul>
+    <li>You are agreeing to participate in this study</li>
+    <li>You are at least 18 years old</li>
+    <li>This is an online study that will take approximately one hour to complete</li>
+    <li>You will be paid $20 plus a bonus of $25-30 for your participation</li>
+    <li>Your participation is completely voluntary</li>
+    <li>You are free to withdraw your participation at any time</li>
+    <li>Any sensitive data collected for payment reasons will be used solely to pay you, and will then immediately be
+    deleted</li>
+    <li>After sensitive data is permanently deleted, your responses will remain completely anonymous</li>
+    <li>All data will be encrypted, and only accessible using a key on a separate password-protected computer</li>
+    <li>Though data collected from this study may be presented at research conferences and published in scholarly
+        outlets, your identity will never be revealed</li>
+</ul>
+</p>
+
+<p><b>
+    Click Next to provide informed consent to take part in this study.
+</b></p>
+
+{% next_button %}
+
+{% endblock %}
