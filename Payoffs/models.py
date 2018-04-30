@@ -17,7 +17,7 @@ class Constants(BaseConstants):
     num_rounds = 1
 
     fields_with_encryption = [
-         'payment_method', 'email', 'name', 'bank_details', 'postal_address',
+         'email', 'name', 'bank_details', 'postal_address',
     ]
 
 
@@ -30,7 +30,7 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
-    payment_method_cleartext = models.IntegerField(
+    payment_method = models.IntegerField(
         label="Please specify below which payment method you would prefer.",
         choices=[
             [1, 'PayPal'],
@@ -39,7 +39,6 @@ class Player(BasePlayer):
         ],
         initial=None,
         widget=widgets.RadioSelect)
-    payment_method_encrypted = djmodels.BinaryField(null=True)
 
     email_cleartext = models.StringField(
         label="Please enter your PayPal registered email address. We will use this email address to process "

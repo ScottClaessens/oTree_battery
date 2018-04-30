@@ -76,12 +76,13 @@ def pps_to_csv():
     with open(filename, 'w', encoding='utf8') as f:
         writer = DictWriter(
             f,
-            fieldnames=['participant_code'] + Constants.fields_with_encryption,
+            fieldnames=['participant_code', 'payment_method'] + Constants.fields_with_encryption,
             lineterminator='\n')
         writer.writeheader()
 
         for player in Player.objects.all():
-            row = {'participant_code': player.participant.code}
+            row = {'participant_code': player.participant.code,
+                   'payment_method': player.payment_method}
             for f in Constants.fields_with_encryption:
                 encrypted_value = getattr(player, '{}_encrypted'.format(f))
                 if encrypted_value is None:

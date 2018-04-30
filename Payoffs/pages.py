@@ -293,7 +293,7 @@ class Payoffs(Page):
 
 class Payment(Page):
     form_model = 'player'
-    form_fields = ['payment_method_cleartext']
+    form_fields = ['payment_method']
 
     def vars_for_template(self):
         return {'overall_bonus_cash': self.participant.payoff.to_real_world_currency(self.session),
@@ -309,7 +309,7 @@ class Method1(Page):
 
     def before_next_page(self):
         for f in Constants.fields_with_encryption:
-            if (self.player, '{}_cleartext'.format(f)) is not None:
+            if getattr(self.player, '{}_cleartext'.format(f)) is not None:
                 cleartext_value = getattr(self.player, '{}_cleartext'.format(f))
                 # before encrypting, need to encode to bytes
                 cleartext_value = cleartext_value.encode('utf-8')
@@ -330,7 +330,7 @@ class Method2(Page):
 
     def before_next_page(self):
         for f in Constants.fields_with_encryption:
-            if (self.player, '{}_cleartext'.format(f)) is not None:
+            if getattr(self.player, '{}_cleartext'.format(f)) is not None:
                 cleartext_value = getattr(self.player, '{}_cleartext'.format(f))
                 # before encrypting, need to encode to bytes
                 cleartext_value = cleartext_value.encode('utf-8')
@@ -350,7 +350,7 @@ class Method3(Page):
 
     def before_next_page(self):
         for f in Constants.fields_with_encryption:
-            if (self.player, '{}_cleartext'.format(f)) is not None:
+            if getattr(self.player, '{}_cleartext'.format(f)) is not None:
                 cleartext_value = getattr(self.player, '{}_cleartext'.format(f))
                 # before encrypting, need to encode to bytes
                 cleartext_value = cleartext_value.encode('utf-8')

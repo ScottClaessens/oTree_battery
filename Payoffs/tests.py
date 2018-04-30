@@ -17,11 +17,11 @@ class PlayerBot(Bot):
         yield (pages.Payoffs)
         yield (pages.Payment, {'payment_method': random.randint(1, 3)})
         if self.player.payment_method == 1:
-            yield (pages.Method1, {'email': 'scott.claessens@hotmail.co.uk'})
+            yield (pages.Method1, {'email_cleartext': 'scott.claessens@hotmail.co.uk'})
         elif self.player.payment_method == 2:
-            yield (pages.Method2, {'name': 'Scott Claessens',
-                                   'bank_details': '000-000-000'})
+            yield (pages.Method2, {'name_cleartext': 'Scott Claessens',
+                                   'bank_details_cleartext': '000-000-000'})
         elif self.player.payment_method == 3:
-            yield (pages.Method3, {'name': 'Scott Claessens',
-                                   'postal_address': '1 High Street, Auckland, 1010'})
+            yield (pages.Method3, {'name_cleartext': 'Scott Claessens',
+                                   'postal_address_cleartext': '1 High Street, Auckland, 1010'})
         yield Submission(pages.Final, check_html=False)
