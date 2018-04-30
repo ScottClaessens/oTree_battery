@@ -59,6 +59,7 @@ class Player(BasePlayer):
               "so please make sure it is correct.", initial=None)
     postal_address_encrypted = djmodels.BinaryField(null=True)
 
+    total_payment = models.FloatField()
     timeout_happened = models.BooleanField()
     timeout_game_number = models.IntegerField()
     simulated = models.BooleanField()

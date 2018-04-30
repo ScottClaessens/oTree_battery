@@ -299,6 +299,9 @@ class Payment(Page):
         return {'overall_bonus_cash': self.participant.payoff.to_real_world_currency(self.session),
                 'payoff_plus_participation_fee': self.participant.payoff_plus_participation_fee()}
 
+    def before_next_page(self):
+        self.player.total_payment = self.participant.payoff_plus_participation_fee()
+
 
 class Method1(Page):
     form_model = 'player'
