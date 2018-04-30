@@ -2,6 +2,7 @@ from otree.api import (
     models, widgets, BaseConstants, BaseSubsession, BaseGroup, BasePlayer,
     Currency as c, currency_range
 )
+import time
 # from otree.models.session import Session as BaseSession
 author = 'Scott Claessens'
 
@@ -19,6 +20,14 @@ class Constants(BaseConstants):
 class Subsession(BaseSubsession):
     def creating_session(self):
         for p in self.get_players():
+            # Timer = 1 hour (60 * 60 secs)
+            p.participant.vars['expiry'] = time.time() + (self.session.config['timer'] * 60)
+            p.participant.vars['timeout_happened'] = None
+            # Set game number
+            p.participant.vars['game_number'] = 0
+            #
+            # Set empty participant vars
+            #
             # Dictator Game
             p.participant.vars['matching_dg_role'] = None
             p.participant.vars['matching_dg_transfer_to_me'] = None
@@ -60,7 +69,6 @@ class Subsession(BaseSubsession):
             p.participant.vars['matching_pgg_cont3'] = None
             p.participant.vars['matching_pgg_payoff'] = None
             p.participant.vars['pgg'] = None
-
 
 
 class Group(BaseGroup):

@@ -13,12 +13,13 @@ from otree.common_internal import (
 )
 import otree.common_internal
 from django.core.urlresolvers import reverse
+import time
 
 
 def get_new_sequence_of_apps(app_sequence):
-    the_rest = app_sequence[1:8]
+    the_rest = app_sequence[1:7]
     random.shuffle(the_rest)
-    app_sequence = [app_sequence[0]] + the_rest + [app_sequence[8]]
+    app_sequence = [app_sequence[0]] + the_rest + [app_sequence[7]]
     return app_sequence
 
 
@@ -32,6 +33,7 @@ def get_players(participant, app_sequence):
         ).order_by('round_number')
         lst.extend(list(players))
     return lst
+
 
 def build_participant_to_player_lookups(participant, subsession_app_names):
         views_modules = {}
@@ -64,8 +66,20 @@ def build_participant_to_player_lookups(participant, subsession_app_names):
         ParticipantToPlayerLookup.objects.bulk_create(records_to_create)
 
 
+def vars_for_all_templates(self):
+    return {'simulated': self.participant.vars['simulated']}
+
+
 class Consent(Page):
+    timer_text = 'Time left to complete the study:'
+
+    def get_timeout_seconds(self):
+        return self.participant.vars['expiry'] - time.time()
+
     def is_displayed(self):
+        #
+        # Randomisation
+        #
         if self.session.config['randomisation'] is True:
             print('OLD APP SEQ', self.participant.session.config['app_sequence'])
             if not self.player.sequence_of_apps:
@@ -78,14 +92,41 @@ class Consent(Page):
         else:
             self.participant.vars['sequence_of_apps'] = self.session.config['app_sequence']
             self.player.sequence_of_apps = self.session.config['app_sequence']
+        #
+        # Set simulated participants
+        #
+        if self.participant.label in ("sim_01", "sim_02", "sim_03", "sim_04",
+                                   "sim_05", "sim_06", "sim_07", "sim_08",
+                                   "sim_09", "sim_10", "sim_11", "sim_12",
+                                   "sim_13", "sim_14", "sim_15", "sim_16"):
+            self.participant.vars['simulated'] = True
+        else:
+            self.participant.vars['simulated'] = False
         return True
 
     def before_next_page(self):
-        self.participant.vars['game_number'] = 1
+        self.participant.vars['game_number'] += 1
+        if self.timeout_happened:
+            self.participant.vars['timeout_happened'] = True
+            self.participant.vars['timeout_game_number'] = self.participant.vars['game_number']
 
 
 class Instructions(Page):
-    pass
+    timer_text = 'Time left to complete the study:'
+
+    def get_timeout_seconds(self):
+        return self.participant.vars['expiry'] - time.time()
+
+    def is_displayed(self):
+        return self.participant.vars['expiry'] \
+               - time.time() > 3 and not self.participant.vars[
+            'timeout_happened'] and not self.participant.vars[
+            'simulated']
+
+    def before_next_page(self):
+        if self.timeout_happened:
+            self.participant.vars['timeout_happened'] = True
+            self.participant.vars['timeout_game_number'] = self.participant.vars['game_number']
 
 
 page_sequence = [

@@ -13,9 +13,30 @@
     padding: 10px 10px 10px 10px;
 }
 </style>
+<style>
+    .otree-timer {
+        display: none;
+    }
+</style>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    $(function () {
+        $('.otree-timer__time-left').on('update.countdown', function (event) {
+            if (event.offset.totalSeconds <= 600) {
+                $('.otree-timer').show();
+            }
+        });
+    });
+</script>
 {% endblock %}
 
 {% block content %}
+
+{% if simulated %}
+    <p><b><u>SIMULATED PLAYER.</u> Click Next to submit automatic responses and proceed to wait page.</b></p>
+{% else %}
 
 <p>
     Welcome to the study <b>how people interact and make economic decisions in groups</b>. Please read the following
@@ -52,7 +73,7 @@
         withdraw from the study at any time.
     </p>
     <p>
-        For payment purposes, sensitive information will be asked from you at the end of this study. If your preferred
+        Payment information will be asked from you at the end of this study. If your preferred
         method of payment is PayPal, we will ask you for your email address. If your preferred method of payment is a
         direct online bank transfer, we will ask you for your bank details. If your preferred method of payment is posted
         cheque, we will ask you for your full name and postal address. This information will only be used for payment
@@ -62,9 +83,9 @@
     </p>
     <p>
         The data from this study will be stored in an encrypted data file, which can only be accessed with a private
-        key stored on a separate computer. These data will be stored indefinitely for research purposes. The final
-        anonymous data file may be shared with other competent professionals on a case-by-case basis for research
-        purposes. Your data will be reported in a manner that makes it impossible for others to identify your responses.
+        key stored on a separate password-protected computer. The final anonymous data file may be shared with other
+        competent professionals on a case-by-case basis for research purposes. It will not be possible for others to
+        identify your responses from this data or subsequent reports.
     </p>
     <p>
         If you have any questions or concerns about this study, please contact Dr Chris Sibley (Phone: 09 373 7599
@@ -94,9 +115,9 @@
     <li>You will be paid $20 plus a bonus of $25-30 for your participation</li>
     <li>Your participation is completely voluntary</li>
     <li>You are free to withdraw your participation at any time</li>
-    <li>Any sensitive data collected for payment reasons will be used solely to pay you, and will then immediately be
+    <li>Any data collected for payment reasons will be used solely to pay you, and will then immediately be
     deleted</li>
-    <li>After sensitive data is permanently deleted, your responses will remain completely anonymous</li>
+    <li>After payment data is permanently deleted, your responses will remain completely anonymous</li>
     <li>All data will be encrypted, and only accessible using a key on a separate password-protected computer</li>
     <li>Though data collected from this study may be presented at research conferences and published in scholarly
         outlets, your identity will never be revealed</li>
@@ -106,6 +127,8 @@
 <p><b>
     Click Next to provide informed consent to take part in this study.
 </b></p>
+
+{% endif %}
 
 {% next_button %}
 

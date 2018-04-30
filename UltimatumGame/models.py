@@ -29,7 +29,7 @@ class Group(BaseGroup):
 
 class Player(BasePlayer):
     comprehension = models.IntegerField(
-        label="What happens if person B accepts an offer of 20 points? What happens if person B rejects this offer?",
+        label="What happens if Person B accepts an offer of 20 points? What happens if Person B rejects this offer?",
         choices=[
             [1, 'If B accepts this offer then A gets 80 and B gets 20, if B rejects then A gets 80 and B gets 0'],
             [2, 'If B accepts this offer than A gets 0 and B gets 0, if B rejects then A gets 0 and B gets 0'],
@@ -38,16 +38,15 @@ class Player(BasePlayer):
     )
 
     ug1 = models.CurrencyField(
-        label="If you are person A, what amount will you offer to person B?",
+        label="If you are Person A, what amount will you offer to Person B? [0 - 100]",
         min=0,
         max=100,
     )
 
     ug2 = models.CurrencyField(
-        label="If you are person B, please use the slider below to indicate your minimum acceptable offer. That is, "
-              "if the offer that A gives you is below this, you would reject and if the offer A gives you is above or "
-              "equal to this, you would accept.",
+        label="If you are Person B, what is your minimum acceptable offer? That is, if the offer that Person A gives "
+              "you is below this, you would reject and if the offer A gives you is "
+              "above or equal to this, you would accept. [0 - 100]",
         min=0,
-        max=100,
-        widget=widgets.Slider(attrs={'step': '1'})
+        max=100
     )

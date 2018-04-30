@@ -59,7 +59,7 @@ AWS_SECRET_ACCESS_KEY = environ.get('AWS_SECRET_ACCESS_KEY')
 
 
 # e.g. EUR, CAD, GBP, CHF, CNY, JPY
-REAL_WORLD_CURRENCY_CODE = 'NZD'
+REAL_WORLD_CURRENCY_CODE = 'USD'
 USE_POINTS = True
 
 
@@ -80,7 +80,12 @@ DEMO_PAGE_INTRO_TEXT = """
 """
 
 ROOMS = [
-
+    {
+        'name': 'testing',
+        'display_name': 'Room for Testing',
+        'participant_label_file': 'participant_label_file.txt',
+        'use_secure_urls': True,
+    }
 ]
 
 
@@ -114,7 +119,7 @@ mturk_hit_settings = {
 # e.g. self.session.config['participation_fee']
 
 SESSION_CONFIG_DEFAULTS = {
-    'real_world_currency_per_point': 0.00,
+    'real_world_currency_per_point': 0.02,
     'participation_fee': 20.00,
     'doc': "",
     'mturk_hit_settings': mturk_hit_settings,
@@ -130,7 +135,8 @@ SESSION_CONFIGS = [
                          'DictatorGame', 'ThirdPPGame',
                          'SecondPPGame', 'Payoffs'],
         'use_browser_bots': False,
-        'randomisation': False
+        'randomisation': False,
+        'timer': 60
     }
 ]
 

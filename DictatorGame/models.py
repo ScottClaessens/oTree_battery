@@ -29,7 +29,7 @@ class Group(BaseGroup):
 
 class Player(BasePlayer):
     comprehension = models.IntegerField(
-        label="What happens if person A transfers 20 points?",
+        label="What happens if Person A transfers 20 points?",
         choices=[
             [1, 'A keeps 80 points and B gets 20 points'],
             [2, 'Both get 20 points']],
@@ -37,7 +37,7 @@ class Player(BasePlayer):
     )
 
     dg = models.CurrencyField(
-        label="If you are person A in the interaction, how much will you transfer to person B?",
+        label="If you are Person A in the interaction, how many points will you transfer to Person B? [0 - 100]",
         min=0,
         max=100,
     )

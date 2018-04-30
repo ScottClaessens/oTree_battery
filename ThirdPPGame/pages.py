@@ -1,26 +1,45 @@
 from . import models
 from ._builtin import Page, WaitPage
+import time
 
 
 def vars_for_all_templates(self):
     return {'game_number': self.participant.vars['game_number']}
 
 
-class thirdppIntro(Page):
+class BasePage(Page):
+    timer_text = 'Time left to complete the study:'
+
+    def get_timeout_seconds(self):
+        return self.participant.vars['expiry'] - time.time()
+
+    def is_displayed(self):
+        return self.participant.vars['expiry'] \
+               - time.time() > 3 and not self.participant.vars[
+            'timeout_happened'] and not self.participant.vars[
+            'simulated']
+
+    def before_next_page(self):
+        if self.timeout_happened:
+            self.participant.vars['timeout_happened'] = True
+            self.participant.vars['timeout_game_number'] = self.participant.vars['game_number']
+
+
+class thirdppIntro(BasePage):
     pass
 
 
-class thirdppComp(Page):
+class thirdppComp(BasePage):
     form_model = 'player'
     form_fields = ['comprehension']
 
 
-class thirdpp1(Page):
+class thirdpp1(BasePage):
     form_model = 'player'
     form_fields = ['thirdpp1']
 
 
-class thirdpp2(Page):
+class thirdpp2(BasePage):
     form_model = 'player'
     form_fields = ['thirdpp2']
 

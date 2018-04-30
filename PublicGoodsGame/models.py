@@ -31,14 +31,14 @@ class Player(BasePlayer):
     comprehension = models.IntegerField(
         label="What contribution BY YOU maximises payoffs for the GROUP? What about for yourself?",
         choices=[
-            [1, 'Contributing 100 maximizes payoffs for both the group and myself'],
-            [2, 'Contributing 0 maximizes payoffs for both the group and myself'],
-            [3, 'Contributing 100 maximizes payoffs for the group but contributing 0 maximizes my own payoff']],
+            [1, 'Contributing 100 maximises payoffs for both the group and myself'],
+            [2, 'Contributing 0 maximises payoffs for both the group and myself'],
+            [3, 'Contributing 100 maximises payoffs for the group but contributing 0 maximises my own payoff']],
         widget=widgets.RadioSelect
     )
 
     pgg = models.CurrencyField(
-        label="How many points do you wish to contribute to the group project?",
+        label="How many points do you wish to contribute to the group project? [0 - 100]",
         min=0,
         max=100,
     )

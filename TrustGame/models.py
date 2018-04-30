@@ -29,14 +29,14 @@ class Player(BasePlayer):
     comprehension = models.IntegerField(
         label="What happens if Person A transfers 50 points and Person B transfers back 25 points?",
         choices=[
-            [1, 'Person A earns 25 points, person B earns 175 points'],
-            [2, 'Person A earns 50 points, person B earns 50 points'],
-            [3, 'Person A earns 100 points, person B earns 100 points']],
+            [1, 'Person A earns 25 points, Person B earns 175 points'],
+            [2, 'Person A earns 50 points, Person B earns 50 points'],
+            [3, 'Person A earns 100 points, Person B earns 100 points']],
         widget=widgets.RadioSelect
         )
 
     tg1 = models.IntegerField(
-        label="If you are person A, do you want to transfer your 50 points to B?",
+        label="If you are Person A, do you want to transfer your 50 points to Person B?",
         choices=[
             [1, 'No transfer'],
             [2, 'Transfer 50 points']],
@@ -44,8 +44,8 @@ class Player(BasePlayer):
     )
 
     tg2 = models.CurrencyField(
-        label="If you are person B and person A transfers you 50 points (which is multiplied to 150), "
-              "how many points do you want to transfer back to A?",
+        label="If you are Person B and Person A transfers you 50 points (which is multiplied to 150), "
+              "how many points do you want to transfer back to A? [0 - 150]",
         min=0,
         max=150,
     )

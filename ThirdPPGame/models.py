@@ -27,7 +27,7 @@ class Group(BaseGroup):
 
 class Player(BasePlayer):
     comprehension = models.IntegerField(
-        label="When can C remove points from A?",
+        label="When can Person C remove points from Person A?",
         choices=[
             [1, 'C can only choose to remove points from A if A chooses to take'],
             [2, 'C can always remove points from A'],
@@ -36,7 +36,7 @@ class Player(BasePlayer):
         )
 
     thirdpp1 = models.IntegerField(
-        label="If you are person A, will you take from person B?",
+        label="If you are Person A, will you take from Person B?",
         choices=[
             [1, "Don't Take"],
             [2, 'Take']],
@@ -44,8 +44,8 @@ class Player(BasePlayer):
     )
 
     thirdpp2 = models.CurrencyField(
-        label="If you are person C, how many points will you remove from person A if they take? Reminder: if A chooses "
-              "to take, B loses 50 points and A gains 30 points.",
+        label="If you are Person C, how many points will you remove from Person A if they take? [0 - 100] "
+              "Reminder: if A chooses to take, B loses 50 points and A gains 30 points.",
         min=0,
         max=100,
     )

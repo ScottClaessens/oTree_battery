@@ -29,7 +29,7 @@ class Group(BaseGroup):
 
 class Player(BasePlayer):
     comprehension = models.IntegerField(
-        label="If B person transfers and A doesn't, how many points will they each have at the end of the "
+        label="If Person B transfers and Person A doesn't, how many points will they each have at the end of the "
               "transfer phase?",
         choices=[
             [1, 'A will have 100 (100 start  - 0 transferred), B will have 130 (100 start - 30 transferred + 60 gotten)'],
@@ -49,13 +49,11 @@ class Player(BasePlayer):
     secondpp2 = models.CurrencyField(
         label="If the other DOES TRANSFER, I will remove this many points...",
         min=0,
-        max=70,
-        widget=widgets.Slider(attrs={'step': '1'})
+        max=70
     )
 
     secondpp3 = models.CurrencyField(
         label="If the other DOESN'T TRANSFER, I will remove this many points...",
         min=0,
-        max=70,
-        widget=widgets.Slider(attrs={'step': '1'})
+        max=70
     )
