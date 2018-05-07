@@ -10,4 +10,4 @@ class PlayerBot(Bot):
         yield (pages.secondppIntro)
         yield (pages.secondppComp, {'comprehension': 1})
         yield (pages.secondpp1, {'secondpp1': random.randint(1,2)})
-        yield (pages.secondpp2, {'secondpp2': random.randint(1,70), 'secondpp3': random.randint(1,70)})
+        yield (pages.secondpp2, {'secondpp2': random.randint(1,50), 'secondpp3': random.randint(1,50)})

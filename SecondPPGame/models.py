@@ -47,13 +47,13 @@ class Player(BasePlayer):
     )
 
     secondpp2 = models.CurrencyField(
-        label="If the other DOES TRANSFER, I will remove this many points... [0 - 70]",
+        label="If the other DOES TRANSFER, I will remove this many points... [0 - 50]",
         min=0,
-        max=70
+        max=50
     )
 
     secondpp3 = models.CurrencyField(
-        label="If the other DOESN'T TRANSFER, I will remove this many points... [0 - 70]",
+        label="If the other DOESN'T TRANSFER, I will remove this many points... [0 - 50]",
         min=0,
-        max=70
+        max=50
     )

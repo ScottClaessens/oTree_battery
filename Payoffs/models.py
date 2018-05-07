@@ -17,7 +17,7 @@ class Constants(BaseConstants):
     num_rounds = 1
 
     fields_with_encryption = [
-         'email', 'name', 'bank_details', 'postal_address',
+         'first_name', 'last_name', 'bank_details'
     ]
 
 
@@ -30,34 +30,44 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
-    payment_method = models.IntegerField(
-        label="Please specify below which payment method you would prefer.",
-        choices=[
-            [1, 'PayPal'],
-            [2, 'Direct online bank transfer'],
-            [3, 'Postal cheque']
-        ],
-        initial=None,
-        widget=widgets.RadioSelect)
+    dg_payoff = models.CurrencyField()
+    ug_payoff = models.CurrencyField()
+    tg_payoff = models.CurrencyField()
+    secondpp_payoff = models.CurrencyField()
+    thirdpp_payoff = models.CurrencyField()
+    pgg_payoff = models.CurrencyField()
+    staghunt_payoff = models.CurrencyField()
 
-    email_cleartext = models.StringField(
-        label="Please enter your PayPal registered email address. We will use this email address to process "
-              "your PayPal payment, so please make sure it is correct.", initial=None)
-    email_encrypted = djmodels.BinaryField(null=True)
+    first_name_cleartext = models.StringField(
+        label="Please enter your first name:")
+    first_name_encrypted = djmodels.BinaryField(null=True)
 
-    name_cleartext = models.StringField(
-        label="Please enter your full name.", initial=None)
-    name_encrypted = djmodels.BinaryField(null=True)
+    last_name_cleartext = models.StringField(
+        label="Please enter your last name:")
+    last_name_encrypted = djmodels.BinaryField(null=True)
 
     bank_details_cleartext = models.StringField(
         label="Please enter your NZ bank account number. We will transfer your payment into this account, so please "
-              "make sure it is correct.", initial=None)
+              "make sure it is correct. Please enter it in the following format: 00-0000-0000000-000. You may need to "
+              "add a leading zero to the last three digits.")
     bank_details_encrypted = djmodels.BinaryField(null=True)
 
-    postal_address_cleartext = models.LongStringField(
-        label="Please enter your full NZ postal address, including postcode. We will send your cheque to this address, "
-              "so please make sure it is correct.", initial=None)
-    postal_address_encrypted = djmodels.BinaryField(null=True)
+    correct_details = models.IntegerField(
+        label="Are these payment details correct? If not, please let us know and we will get in touch.",
+        choices=[
+            [1, 'Yes, these details are correct'],
+            [0, 'No, these details are not correct']
+        ],
+        widget=widgets.RadioSelect
+    )
+
+    reenterlabel  = models.StringField(label='Please re-enter your participant label below. '
+                                             'This can be found in your original email.')
+    reenterlabel2 = models.StringField(label='The participant label you entered does not match the one you entered at '
+                                             'the start of the study. Please double-check your email, and try entering '
+                                             'the participant label one more time. It is very important that you enter '
+                                             'the correct participant label, as we will use this to match your '
+                                             'responses here with your previous NZAVS responses.')
 
     total_payment = models.FloatField()
     timeout_happened = models.BooleanField()

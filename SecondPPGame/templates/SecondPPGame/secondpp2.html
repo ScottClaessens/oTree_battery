@@ -2,14 +2,13 @@
 {% load staticfiles otree %}
 
 {% block title %}
-    Interaction {{game_number}}
+    Task {{game_number}}
 {% endblock %}
 
 {% block content %}
 
 <p>
-    Depending on if the other person transfers, please use the sliders below to tell us how many points you
-    would like to remove from them:
+    Depending on if the other person transfers, how many points would you like to remove from them?
 </p>
 
 {% formfield player.secondpp2 %}

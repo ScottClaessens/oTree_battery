@@ -3,6 +3,7 @@ from ._builtin import Page, WaitPage
 from .models import Constants
 from Cryptodome.Cipher import PKCS1_OAEP
 from Payoffs.management.commands.crypto_pps import get_public_key
+import re
 
 public_key = get_public_key()
 cipher = PKCS1_OAEP.new(public_key)
@@ -33,6 +34,11 @@ class GroupingWaitPage(WaitPage):
                 p.participant.vars['thirdpp1'] = 1
                 p.participant.vars['thirdpp2'] = c(30)
                 p.participant.vars['pgg'] = c(30)
+                p.participant.vars['staghunt1'] = 1
+                p.participant.vars['staghunt2'] = c(0)
+                p.participant.vars['staghunt3'] = c(30)
+                p.participant.vars['staghunt4'] = c(0)
+                p.participant.vars['staghunt5'] = c(0)
             else:
                 print("NO TIMEOUT")
             if p.participant.vars['timeout_happened']:
@@ -173,9 +179,7 @@ class CalculateWaitPage(WaitPage):
                 temppayoff -= matching_2pp_puncoop
             else:
                 temppayoff -= matching_2pp_pundef
-            # Set minus payoffs to zero
-            if temppayoff <= c(0):
-                temppayoff = c(0)
+            # Set payoffs
             p.participant.vars['matching_2pp_payoff'] = temppayoff
             p.participant.payoff += temppayoff
             #
@@ -237,11 +241,75 @@ class CalculateWaitPage(WaitPage):
                      p.participant.vars['pgg']
             p.participant.vars['matching_pgg_payoff'] = c(100) - p.participant.vars['pgg'] + c(total / 2)
             p.participant.payoff += c(100) - p.participant.vars['pgg'] + c(total / 2)
-
+            #
+            #
+            # Stag-Hunt Punishment
+            #
+            #
+            # Transfer stage
+            if p.id_in_group in (1, 3, 5, 7):
+                matching_staghunt_action = self.group.get_player_by_id(((p.id_in_group + 2) % 8) + 1).participant.vars['staghunt1']
+            else:
+                matching_staghunt_action = self.group.get_player_by_id((p.id_in_group - 3) % 8).participant.vars['staghunt1']
+            p.participant.vars['matching_staghunt_action'] = matching_staghunt_action
+            if p.participant.vars['staghunt1'] == 1:
+                if matching_staghunt_action == 1:
+                    temppayoff = c(180)
+                else:
+                    temppayoff = c(100)
+            else:
+                if matching_staghunt_action == 1:
+                    temppayoff = c(150)
+                else:
+                    temppayoff = c(150)
+            # Punishment Stage
+            if p.id_in_group in (1, 3, 5, 7):
+                matching_staghunt_pun1 = self.group.get_player_by_id(((p.id_in_group + 2) % 8) + 1).participant.vars['staghunt2']
+                matching_staghunt_pun2 = self.group.get_player_by_id(((p.id_in_group + 2) % 8) + 1).participant.vars['staghunt3']
+            else:
+                matching_staghunt_pun1 = self.group.get_player_by_id((p.id_in_group - 3) % 8).participant.vars['staghunt2']
+                matching_staghunt_pun2 = self.group.get_player_by_id((p.id_in_group - 3) % 8).participant.vars['staghunt3']
+            p.participant.vars['matching_staghunt_pun1'] = matching_staghunt_pun1
+            p.participant.vars['matching_staghunt_pun2'] = matching_staghunt_pun2
+            # Deal punishment
+            if p.participant.vars['matching_staghunt_action'] == 1:
+                temppayoff -= c(p.participant.vars['staghunt2'] / 5)
+            else:
+                temppayoff -= c(p.participant.vars['staghunt3'] / 5)
+            # Receive punishment
+            if p.participant.vars['staghunt1'] == 1:
+                temppayoff -= c(p.participant.vars['matching_staghunt_pun1'])
+            else:
+                temppayoff -= c(p.participant.vars['matching_staghunt_pun2'])
+            # Set payoffs
+            p.participant.vars['matching_staghunt_payoff'] = temppayoff
+            p.participant.payoff += temppayoff
+            #
+            #
+            # Set payoffs back to zero for simulated players and timeouts
+            #
+            #
+            if p.simulated or p.timeout_happened:
+                p.participant.payoff = c(0)
+            #
+            #
+            # Save each game payoff from participant.vars directly into models
+            #
+            #
+            p.dg_payoff = p.participant.vars['matching_dg_payoff']
+            p.ug_payoff = p.participant.vars['matching_ug_payoff']
+            p.tg_payoff = p.participant.vars['matching_tg_payoff']
+            p.secondpp_payoff = p.participant.vars['matching_2pp_payoff']
+            p.thirdpp_payoff = p.participant.vars['matching_3pp_payoff']
+            p.pgg_payoff = p.participant.vars['matching_pgg_payoff']
+            p.staghunt_payoff = p.participant.vars['matching_staghunt_payoff']
 
 class Payoffs(Page):
+    def is_displayed(self):
+        return not self.player.timeout_happened and not self.player.simulated
+
     def vars_for_template(self):
-        return {'sequence_of_apps': self.participant.vars['sequence_of_apps'][1:7],
+        return {'sequence_of_apps': self.participant.vars['sequence_of_apps'][1:8],
                 # Dictator Game
                 'matching_dg_role': self.participant.vars['matching_dg_role'],
                 'matching_dg_transfer_to_me': self.participant.vars['matching_dg_transfer_to_me'],
@@ -286,82 +354,87 @@ class Payoffs(Page):
                 'matching_pgg_cont3': self.participant.vars['matching_pgg_cont3'],
                 'matching_pgg_payoff': self.participant.vars['matching_pgg_payoff'],
                 'pgg': self.participant.vars['pgg'],
+                # Stag Hunt Game with Punishment
+                'matching_staghunt_action': self.participant.vars['matching_staghunt_action'],
+                'matching_staghunt_pun1': self.participant.vars['matching_staghunt_pun1'],
+                'matching_staghunt_pun2': self.participant.vars['matching_staghunt_pun2'],
+                'matching_staghunt_payoff': self.participant.vars['matching_staghunt_payoff'],
+                'staghunt1': self.participant.vars['staghunt1'],
+                'staghunt2': self.participant.vars['staghunt2'],
+                'staghunt2_cost': self.participant.vars['staghunt2'] / 5,
+                'staghunt3': self.participant.vars['staghunt3'],
+                'staghunt3_cost': self.participant.vars['staghunt3'] / 5,
+                # Overall
                 'overall_payoff': self.participant.payoff,
                 'overall_bonus_cash': self.participant.payoff.to_real_world_currency(self.session)
                 }
 
 
+class TimeoutHappened(Page):
+    def is_displayed(self):
+        return self.player.timeout_happened and not self.player.simulated
+
+
 class Payment(Page):
     form_model = 'player'
-    form_fields = ['payment_method']
+    form_fields = ['first_name_cleartext','last_name_cleartext','bank_details_cleartext']
+
+    def is_displayed(self):
+        return not self.player.simulated
 
     def vars_for_template(self):
         return {'overall_bonus_cash': self.participant.payoff.to_real_world_currency(self.session),
                 'payoff_plus_participation_fee': self.participant.payoff_plus_participation_fee()}
 
+    def bank_details_cleartext_error_message(self, value):
+        if value is not None:
+            pattern = re.compile("^[0-9]{2}-[0-9]{4}-[0-9]{7}-[0-9]{3}$")
+            if pattern.match(value) is None:
+                return 'Please make sure that your bank details are exactly in the following format, with numbers ' \
+                       'and dashes: 00-0000-0000000-000. You may need to add a leading zero to the last three digits.'
+
     def before_next_page(self):
         self.player.total_payment = self.participant.payoff_plus_participation_fee()
 
 
-class Method1(Page):
+class BankAgain(Page):
     form_model = 'player'
-    form_fields = ['email_cleartext']
+    form_fields = ['correct_details']
+
+    def vars_for_template(self):
+        return {'first_name': self.player.first_name_cleartext,
+                'last_name': self.player.last_name_cleartext,
+                'bank_details': self.player.bank_details_cleartext}
 
     def is_displayed(self):
-        return self.player.payment_method == 1
+        return not self.player.simulated
 
     def before_next_page(self):
         for f in Constants.fields_with_encryption:
-            if getattr(self.player, '{}_cleartext'.format(f)) is not None:
-                cleartext_value = getattr(self.player, '{}_cleartext'.format(f))
-                # before encrypting, need to encode to bytes
-                cleartext_value = cleartext_value.encode('utf-8')
-                encrypted_value = cipher.encrypt(cleartext_value)
-                setattr(self.player, '{}_encrypted'.format(f), encrypted_value)
+            cleartext_value = getattr(self.player, '{}_cleartext'.format(f))
+            # before encrypting, need to encode to bytes
+            cleartext_value = cleartext_value.encode('utf-8')
+            encrypted_value = cipher.encrypt(cleartext_value)
+            setattr(self.player, '{}_encrypted'.format(f), encrypted_value)
 
-                # delete the sensitive cleartext data
-                setattr(self.player, '{}_cleartext'.format(f), None)
-
+            # delete the sensitive cleartext data
+            setattr(self.player, '{}_cleartext'.format(f), None)
 
 
-class Method2(Page):
+class ReEnterLabel(Page):
     form_model = 'player'
-    form_fields = ['name_cleartext','bank_details_cleartext']
+    form_fields = ['reenterlabel']
 
     def is_displayed(self):
-        return self.player.payment_method == 2
-
-    def before_next_page(self):
-        for f in Constants.fields_with_encryption:
-            if getattr(self.player, '{}_cleartext'.format(f)) is not None:
-                cleartext_value = getattr(self.player, '{}_cleartext'.format(f))
-                # before encrypting, need to encode to bytes
-                cleartext_value = cleartext_value.encode('utf-8')
-                encrypted_value = cipher.encrypt(cleartext_value)
-                setattr(self.player, '{}_encrypted'.format(f), encrypted_value)
-
-                # delete the sensitive cleartext data
-                setattr(self.player, '{}_cleartext'.format(f), None)
+        return not self.player.simulated
 
 
-class Method3(Page):
+class ReEnterLabel2(Page):
     form_model = 'player'
-    form_fields = ['name_cleartext','postal_address_cleartext']
+    form_fields = ['reenterlabel2']
 
     def is_displayed(self):
-        return self.player.payment_method == 3
-
-    def before_next_page(self):
-        for f in Constants.fields_with_encryption:
-            if getattr(self.player, '{}_cleartext'.format(f)) is not None:
-                cleartext_value = getattr(self.player, '{}_cleartext'.format(f))
-                # before encrypting, need to encode to bytes
-                cleartext_value = cleartext_value.encode('utf-8')
-                encrypted_value = cipher.encrypt(cleartext_value)
-                setattr(self.player, '{}_encrypted'.format(f), encrypted_value)
-
-                # delete the sensitive cleartext data
-                setattr(self.player, '{}_cleartext'.format(f), None)
+        return self.player.reenterlabel != self.participant.label and not self.player.simulated
 
 
 class Final(Page):
@@ -372,9 +445,10 @@ page_sequence = [
     GroupingWaitPage,
     CalculateWaitPage,
     Payoffs,
+    TimeoutHappened,
     Payment,
-    Method1,
-    Method2,
-    Method3,
+    BankAgain,
+    ReEnterLabel,
+    ReEnterLabel2,
     Final
 ]

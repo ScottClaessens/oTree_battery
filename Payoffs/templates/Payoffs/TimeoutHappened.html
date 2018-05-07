@@ -1,0 +1,23 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    You timed out!
+{% endblock %}
+
+{% block content %}
+
+<p>
+    Unfortunately, you timed out of the study. Because other participants were waiting to be matched with you, we
+    skipped you ahead so they could proceed. As a result, we can't pay you any bonus for this study.
+</p>
+<p>
+    However, we appreciate that you took the time out to participate in the first place, and so we will pay you your
+    initial $20 anyway. Please proceed to the next page to begin payment.
+</p>
+
+{% next_button %}
+
+{% endblock %}
+
+

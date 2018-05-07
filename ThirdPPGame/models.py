@@ -45,7 +45,7 @@ class Player(BasePlayer):
 
     thirdpp2 = models.CurrencyField(
         label="If you are Person C, how many points will you remove from Person A if they take? [0 - 100] "
-              "Reminder: if A chooses to take, B loses 50 points and A gains 30 points.",
+              "(Reminder: if A chooses to take, B loses 50 points and A gains 30 points.)",
         min=0,
         max=100,
     )

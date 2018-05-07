@@ -119,7 +119,7 @@ mturk_hit_settings = {
 # e.g. self.session.config['participation_fee']
 
 SESSION_CONFIG_DEFAULTS = {
-    'real_world_currency_per_point': 0.02,
+    'real_world_currency_per_point': 0.05,
     'participation_fee': 20.00,
     'doc': "",
     'mturk_hit_settings': mturk_hit_settings,
@@ -127,13 +127,19 @@ SESSION_CONFIG_DEFAULTS = {
 
 SESSION_CONFIGS = [
 
-    {   'name': 'oTree_battery',
+    {
+        'name': 'oTree_battery',
         'display_name': "Battery of Economic Games",
         'num_demo_participants': 8,
-        'app_sequence': ['Instructions', 'TrustGame',
-                         'PublicGoodsGame', 'UltimatumGame',
-                         'DictatorGame', 'ThirdPPGame',
-                         'SecondPPGame', 'Payoffs'],
+        'app_sequence': ['Instructions',
+                         'StagHuntGame',
+                         'TrustGame',
+                         'PublicGoodsGame',
+                         'UltimatumGame',
+                         'DictatorGame',
+                         'ThirdPPGame',
+                         'SecondPPGame',
+                         'Payoffs'],
         'use_browser_bots': False,
         'randomisation': False,
         'timer': 60

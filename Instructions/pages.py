@@ -17,9 +17,9 @@ import time
 
 
 def get_new_sequence_of_apps(app_sequence):
-    the_rest = app_sequence[1:7]
+    the_rest = app_sequence[1:8]
     random.shuffle(the_rest)
-    app_sequence = [app_sequence[0]] + the_rest + [app_sequence[7]]
+    app_sequence = [app_sequence[0]] + the_rest + [app_sequence[8]]
     return app_sequence
 
 
@@ -92,6 +92,7 @@ class Consent(Page):
         else:
             self.participant.vars['sequence_of_apps'] = self.session.config['app_sequence']
             self.player.sequence_of_apps = self.session.config['app_sequence']
+            print(self.player.sequence_of_apps)
         #
         # Set simulated participants
         #

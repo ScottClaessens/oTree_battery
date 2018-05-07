@@ -19,10 +19,10 @@
 
 {% for i in sequence_of_apps %}
 
-<p><u>Interaction {{forloop.counter}}</u></p>
+<p><u>Task {{forloop.counter}}</u></p>
 
 {% if i == "DictatorGame" %}
-<p>In this interaction, you were assigned the role of {{matching_dg_role}}.
+<p>In this task, you were assigned the role of {{matching_dg_role}}.
     {% if matching_dg_role == "Person A" %}You started with {{100|c}} and Person B started with nothing.
     {% else %}Person A started with {{100|c}} and you started with nothing.{% endif %}</p>
 {% if matching_dg_role == "Person A" %}
@@ -33,7 +33,7 @@
 <p>Your payoff for this game was <b>{{matching_dg_payoff}}</b>.</p>
 
 {% elif i == "UltimatumGame" %}
-<p>In this interaction, you were assigned the role of {{matching_ug_role}}.
+<p>In this task, you were assigned the role of {{matching_ug_role}}.
     {% if matching_ug_role == "Person A" %}You started with {{100|c}} and Person B started with nothing.
     {% else %}Person A started with {{100|c}} and you started with nothing.{% endif %}</p>
 {% if matching_ug_role == "Person A" %}
@@ -50,7 +50,7 @@
 <p>Your payoff for this game was <b>{{matching_ug_payoff}}</b>.</p>
 
 {% elif i == "TrustGame" %}
-<p>In this interaction, you were assigned the role of {{matching_tg_role}}. Both people started with {{50|c}}.</p>
+<p>In this task, you were assigned the role of {{matching_tg_role}}. Both people started with {{50|c}}.</p>
 {% if matching_tg_role == "Person A" %}
     {% if tg1 == 1 %}
     <p>You didn't transfer anything to Person B, and so Person B had nothing to send back.</p>
@@ -69,19 +69,19 @@
 <p>Your payoff for this game was <b>{{matching_tg_payoff}}</b>.</p>
 
 {% elif i == "SecondPPGame" %}
-<p>In this interaction, both people started with {{100|c}}.</p>
+<p>In this task, both people started with {{100|c}}.</p>
 {% if secondpp1 == 1 %}
     {% if matching_2pp_pd == 1 %}
         <p>In the initial transfer phase, both people transferred {{30|c}} to the other. These transfers were doubled
-            to {{60|c}}. At the end of the transfer stage, therefore, your payoff was {{130|c}}.</p>
+            to {{60|c}}. At the end of the transfer phase, therefore, your payoff was {{130|c}}.</p>
     {% elif matching_2pp_pd == 2 %}
-        <p>In the initial transfer phase, you transferred {{30|c}} but your partner did not. At the end of the transfer
-            stage, therefore, your payoff was {{70|c}}.</p>
+        <p>In the initial transfer phase, you transferred {{30|c}} but the other person did not. At the end of the transfer
+            phase, therefore, your payoff was {{70|c}}.</p>
     {% endif %}
 {% else %}
     {% if matching_2pp_pd == 1 %}
-        <p>In the initial transfer phase, your partner transferred {{30|c}} to you (doubled to {{60|c}}),
-            but you did not transfer anything. At the end of the transfer stage, therefore, your payoff was
+        <p>In the initial transfer phase, the other person transferred {{30|c}} to you (doubled to {{60|c}}),
+            but you did not transfer anything. At the end of the transfer phase, therefore, your payoff was
             {{160|c}}.</p>
     {% elif matching_2pp_pd == 2 %}
         <p>In the initial transfer phase, neither person transferred points to the other.</p>
@@ -89,36 +89,36 @@
 {% endif %}
 {% if matching_2pp_pd == 1 %}
     {% if secondpp2 > 0 %}
-    <p>In the penalty phase, you removed {{secondpp2}} from your partner for their decision in the transfer phase.
+    <p>In the penalty phase, you removed {{secondpp2}} from the other person for their decision in the transfer phase.
     This cost you {{secondpp2_cost}}.</p>
     {% else %}
-    <p>You did not remove any points from your partner for their decision in the transfer phase.</p>
+    <p>You did not remove any points from the other person for their decision in the transfer phase.</p>
     {% endif %}
 {% elif matching_2pp_pd == 2 %}
     {% if secondpp3 > 0 %}
-    <p>In the penalty phase, you removed {{secondpp3}} from your partner for their decision in the transfer phase.
+    <p>In the penalty phase, you removed {{secondpp3}} from the other person for their decision in the transfer phase.
     This cost you {{secondpp3_cost}}.</p>
     {% else %}
-    <p>You did not remove any points from your partner for their decision in the transfer phase.</p>
+    <p>You did not remove any points from the other person for their decision in the transfer phase.</p>
     {% endif %}
 {% endif %}
 {% if secondpp1 == 1 %}
     {% if matching_2pp_puncoop > 0 %}
-    <p>Your partner removed {{matching_2pp_puncoop}} from you.</p>
+    <p>The other person removed {{matching_2pp_puncoop}} from you.</p>
     {% elif matching_2pp_puncoop == 0 %}
-    <p>Your partner did not remove any points from you.</p>
+    <p>The other person did not remove any points from you.</p>
     {% endif %}
 {% else %}
     {% if matching_2pp_pundef > 0 %}
-    <p>Your partner removed {{matching_2pp_pundef}} from you.</p>
+    <p>The other person removed {{matching_2pp_pundef}} from you.</p>
     {% elif matching_2pp_pundef == 0 %}
-    <p>Your partner did not remove any points from you.</p>
+    <p>The other person did not remove any points from you.</p>
     {% endif %}
 {% endif %}
 <p>Your payoff from both phases of this game was <b>{{matching_2pp_payoff}}</b>.</p>
 
 {% elif i == "ThirdPPGame" %}
-<p>In this interaction, you were assigned the role of {{matching_3pp_role}}. All people started with {{100|c}}.</p>
+<p>In this task, you were assigned the role of {{matching_3pp_role}}. All people started with {{100|c}}.</p>
 {% if matching_3pp_role == "Person A" %}
     {% if thirdpp1 == 1 %}
     <p>You chose not to take any points from Person B. As a result, Person C did not remove any points from you.</p>
@@ -145,11 +145,60 @@
 <p>Your payoff for this game was <b>{{matching_3pp_payoff}}</b>.</p>
 
 {% elif i == "PublicGoodsGame" %}
-<p>In this interaction, all four people started with {{100|c}}.</p>
+<p>In this task, all four people started with {{100|c}}.</p>
 <p>You contributed {{pgg}} to the group project. The other group members contributed {{matching_pgg_cont1}},
 {{matching_pgg_cont2}}, and {{matching_pgg_cont3}}. The total number of points was doubled and divided evenly
     between all people. This was added to your remaining points.</p>
 <p>Your payoff for this game was <b>{{matching_pgg_payoff}}</b>.</p>
+
+{% elif i == "StagHuntGame" %}
+<p>In this task, both people started with {{100|c}}.</p>
+{% if staghunt1 == 1 %}
+    {% if matching_staghunt_action == 1 %}
+        <p>In the action phase, both people chose Action 1, so you earned {{80|c}}.
+            At the end of the action phase, therefore, your payoff was {{180|c}}.</p>
+    {% elif matching_staghunt_action == 2 %}
+        <p>In the action phase, you chose Action 1, but the other person chose Action 2. You earned {{0|c}}.
+            At the end of the action phase, therefore, your payoff was {{100|c}}.</p>
+    {% endif %}
+{% else %}
+    {% if matching_staghunt_action == 1 %}
+        <p>In the action phase, you chose Action 2, but the other person chose Action 1. You earned {{50|c}}.
+            At the end of the action phase, therefore, your payoff was {{150|c}}.</p>
+    {% elif matching_staghunt_action == 2 %}
+        <p>In the action phase, both people chose Action 2, so you earned {{50|c}}.
+            At the end of the action phase, therefore, your payoff was {{150|c}}.</p>
+    {% endif %}
+{% endif %}
+{% if matching_staghunt_action == 1 %}
+    {% if staghunt2 > 0 %}
+    <p>In the penalty phase, you removed {{staghunt2}} from the other person for their choice in the action phase.
+    This cost you {{staghunt2_cost}}.</p>
+    {% else %}
+    <p>You did not remove any points from the other person for their choice in the action phase.</p>
+    {% endif %}
+{% elif matching_staghunt_action == 2 %}
+    {% if staghunt3 > 0 %}
+    <p>In the penalty phase, you removed {{staghunt3}} from the other person for their choice in the action phase.
+    This cost you {{staghunt3_cost}}.</p>
+    {% else %}
+    <p>You did not remove any points from the other person for their choice in the action phase.</p>
+    {% endif %}
+{% endif %}
+{% if staghunt1 == 1 %}
+    {% if matching_staghunt_pun1 > 0 %}
+    <p>The other person removed {{matching_staghunt_pun1}} from you.</p>
+    {% elif matching_staghunt_pun1 == 0 %}
+    <p>The other person did not remove any points from you.</p>
+    {% endif %}
+{% elif staghunt1 == 2 %}
+    {% if matching_staghunt_pun2 > 0 %}
+    <p>The other person removed {{matching_staghunt_pun2}} from you.</p>
+    {% elif matching_staghunt_pun2 == 0 %}
+    <p>The other person did not remove any points from you.</p>
+    {% endif %}
+{% endif %}
+<p>Your payoff from both phases of this game was <b>{{matching_staghunt_payoff}}</b>.</p>
 
 {% endif %}
 
@@ -159,11 +208,12 @@
 
 <p><b>
     Your overall payoff for the study was {{overall_payoff}}.
-    This means that your bonus payment for the study is {{overall_bonus_cash}}
+    This means that your bonus for the study is {{overall_bonus_cash}}
 </b></p>
 
 <p>
-    Click Next to see a summary of your earnings for the whole study, and to specify how you would like to be paid.
+    Click Next to see a summary of your reimbursement for the whole study, and to specify how you would like to be
+    reimbursed.
 </p>
 
 {% next_button %}

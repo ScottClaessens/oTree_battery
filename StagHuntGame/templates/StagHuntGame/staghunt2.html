@@ -1,0 +1,21 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree %}
+
+{% block title %}
+    Task {{game_number}}
+{% endblock %}
+
+{% block content %}
+
+<p>
+    Depending on the action that the other person chooses, how many points would you like to remove from them?
+</p>
+
+{% formfield player.staghunt2 %}
+{% formfield player.staghunt3 %}
+
+{% next_button %}
+
+{% include Constants.staghuntInstructions %}
+
+{% endblock %}

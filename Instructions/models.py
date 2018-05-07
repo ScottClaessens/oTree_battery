@@ -69,6 +69,14 @@ class Subsession(BaseSubsession):
             p.participant.vars['matching_pgg_cont3'] = None
             p.participant.vars['matching_pgg_payoff'] = None
             p.participant.vars['pgg'] = None
+            # Stag Hunt Game
+            p.participant.vars['matching_staghunt_action'] = None
+            p.participant.vars['matching_staghunt_pun1'] = None
+            p.participant.vars['matching_staghunt_pun2'] = None
+            p.participant.vars['matching_staghunt_payoff'] = None
+            p.participant.vars['staghunt1'] = None
+            p.participant.vars['staghunt2'] = None
+            p.participant.vars['staghunt3'] = None
 
 
 class Group(BaseGroup):

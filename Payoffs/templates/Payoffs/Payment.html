@@ -2,16 +2,30 @@
 {% load otree static %}
 
 {% block title %}
-    Payment
+    Reimbursement
 {% endblock %}
 
 {% block content %}
 
 <p>
-    In total, you earned <b>{{payoff_plus_participation_fee}}</b> from this study ($20.00 plus {{overall_bonus_cash}}).
+    In total, you will be reimbursed <b>{{payoff_plus_participation_fee}}</b> for this study ($20.00 plus {{overall_bonus_cash}}).
+</p>
+<p>
+    In order to reimburse you this money, we now need to ask you for your name and NZ bank account number.
+    This information will be stored in an encrypted data file, which can only be accessed with a private
+    key stored on a separate password-protected computer. This information will only be used for reimbursement purposes,
+    and will be permanently deleted immediately after the reimbursement is processed by the University of Auckland.
+    After reimbursement, nothing will directly connect you to your name or bank details.
 </p>
 
-{% formfield player.payment_method %}
+{% formfield player.first_name_cleartext %}
+{% formfield player.last_name_cleartext %}
+{% formfield player.bank_details_cleartext %}
+
+<p>
+    <b>Please double-check that all these details are correct before continuing.</b> After clicking Next, you cannot
+    re-submit this information.
+</p>
 
 {% next_button %}
 

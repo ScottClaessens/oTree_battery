@@ -1,0 +1,29 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Reimbursement
+{% endblock %}
+
+{% block content %}
+
+<p>
+    These are the details you just submitted to us. Please double-check that they are correct.
+</p>
+<p>
+    First name: <b>{{first_name}}</b>
+</p>
+<p>
+    Last name: <b>{{last_name}}</b>
+</p>
+<p>
+    NZ bank account number: <b>{{bank_details}}</b>
+</p>
+
+{% formfield player.correct_details %}
+
+{% next_button %}
+
+{% endblock %}
+
+
