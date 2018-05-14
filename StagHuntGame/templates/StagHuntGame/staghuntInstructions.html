@@ -9,52 +9,45 @@
         In this task you are matched with one other person.
     </p>
     <p>
+        One of you will be Person A, one of you will be Person B.
+    </p>
+    <p>
         Both individuals start with 100 points.
     </p>
     <p>
         This task has two phases. In each phase, both people choose at the same time.
     </p>
     <p>
-        The action phase:
+        Phase 1:
     </p>
     <ol>
-        <li>First, both people will choose either Action 1 or Action 2. Your payoff from this phase will be determined
-        by the choices of both people, as below:</li>
+        <li>
+            First, both people will choose whether to transfer 30 of their points to a group project.
+            <ul>
+                <li>
+                    If <i>both people</i> transfer 30 points, then the group project is
+                    successful. This means that the 60 points in the group project will be doubled
+                    and distributed evenly between both players. Each person will end the phase with 130 points
+                    (100 - 30 transferred + 60 received).
+                </li>
+                <li>
+                    If <i>only one person</i> transfers 30 points, then the group project is not
+                    successful. In this case, the person transferring points will lose those 30 points. The other
+                    person gets to keep their 100 points.
+                </li>
+                <li>
+                    If <i>neither person</i> transfers 30 points, then they simply keep the 100
+                    points they had to start with.
+                </li>
+            </ul>
+        </li>
     </ol>
-    <p><i>In each cell, the amount (in points) to the left is the payoff for
-        you and to the right for the other person.</i></p>
-    <table class='table table-bordered text-center'
-           style='width: auto; margin: auto'>
-        <tr>
-            <th colspan=2 rowspan=2></th>
-            <th colspan=2>Other Person</th>
-        </tr>
-        <tr>
-            <th>Action 1</th>
-            <th>Action 2</th>
-        </tr>
-        <tr>
-            <th rowspan=2><span class="rotate90">You</span></th>
-            <th>Action 1</th>
-            <td>{{80|c}}, {{80|c}}</td>
-            <td>{{0|c}}, {{50|c}}</td>
-        </tr>
-        <tr>
-            <th>Action 2</th>
-            <td>{{50|c}}, {{0|c}}</td>
-            <td>{{50|c}}, {{50|c}}</td>
-        </tr>
-    </table>
-    <br>
     <p>
-        These payoffs will be added to your initial 100 points.
-    </p>
-    <p>
-        The penalty phase:
+        Phase 2:
     </p>
     <ol start="2">
-        <li>Based on the outcome of the action phase, each person then chooses whether they want to remove
-            up to 50 points from the other person. For every 5 points someone wants to remove from the other person,
+        <li>Based on the other person's decision in Phase 1, each person then chooses whether they want to
+            remove up to 50 points from the other person. For every 5 points someone wants to remove from the other person,
             they must pay 1 point.</li>
     </ol>
     <p>

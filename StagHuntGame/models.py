@@ -29,31 +29,31 @@ class Group(BaseGroup):
 
 class Player(BasePlayer):
     comprehension = models.IntegerField(
-        label="If you choose Action 1, and the other person chooses Action 2, how many points will you have at the "
-              "end of the action phase?",
+        label="If you transfer 30 points to the group project, but the other person does not, how many points will "
+              "you have at the end of Phase 1?",
         choices=[
-            [1, '100 points (100 start + 0)'],
-            [2, '150 points (100 start + 50)'],
-            [3, '180 points (100 start + 80)']],
+            [1, '130 points (100 start + 30)'],
+            [2, '100 points (100 start + 0)'],
+            [3, '70 points (100 start - 30)']],
         widget=widgets.RadioSelect
     )
 
     staghunt1 = models.IntegerField(
-        label="Which action will you choose?",
+        label="Will you transfer 30 points to the group project?",
         choices=[
-            [1, 'Action 1'],
-            [2, 'Action 2']],
+            [1, 'Transfer 30 points'],
+            [2, 'No transfer']],
         widget=widgets.RadioSelect
     )
 
     staghunt2 = models.CurrencyField(
-        label="If the other chooses ACTION 1, I will remove this many points... [0 - 50]",
+        label="If the other DOES TRANSFER, I will remove this many points... [0 - 50]",
         min=0,
         max=50
     )
 
     staghunt3 = models.CurrencyField(
-        label="If the other chooses ACTION 2, I will remove this many points... [0 - 50]",
+        label="If the other DOESN'T TRANSFER, I will remove this many points... [0 - 50]",
         min=0,
         max=50
     )

@@ -19,33 +19,7 @@ class GroupingWaitPage(WaitPage):
                 "your earnings."
 
     def after_all_players_arrive(self):
-        for p in self.group.get_players():
-            # For drop outs and simulated players, set average responses
-            if p.participant.vars['timeout_happened'] or p.participant.vars['simulated']:
-                print("MEDIAN RESPONSES BEING SAVED")
-                p.participant.vars['dg'] = c(25)
-                p.participant.vars['ug1'] = c(40)
-                p.participant.vars['ug2'] = c(25)
-                p.participant.vars['tg1'] = 2
-                p.participant.vars['tg2'] = c(75)
-                p.participant.vars['secondpp1'] = 1
-                p.participant.vars['secondpp2'] = c(0)
-                p.participant.vars['secondpp3'] = c(30)
-                p.participant.vars['thirdpp1'] = 1
-                p.participant.vars['thirdpp2'] = c(30)
-                p.participant.vars['pgg'] = c(30)
-                p.participant.vars['staghunt1'] = 1
-                p.participant.vars['staghunt2'] = c(0)
-                p.participant.vars['staghunt3'] = c(30)
-                p.participant.vars['staghunt4'] = c(0)
-                p.participant.vars['staghunt5'] = c(0)
-            else:
-                print("NO TIMEOUT")
-            if p.participant.vars['timeout_happened']:
-                p.timeout_happened = True
-                p.timeout_game_number = p.participant.vars['timeout_game_number']
-            elif p.participant.vars['simulated']:
-                p.simulated = True
+        self.group.dropouts_and_simulated()
 
 
 class CalculateWaitPage(WaitPage):
@@ -56,253 +30,8 @@ class CalculateWaitPage(WaitPage):
                 "your earnings."
 
     def after_all_players_arrive(self):
-        for p in self.group.get_players():
-            print("BEGINNING CALCULATIONS")
-            #
-            #
-            # Dictator Game
-            #
-            #
-            if p.id_in_group in (1, 3, 5, 7):
-                # Person A
-                p.participant.vars['matching_dg_role'] = 'Person A'
-                p.participant.vars['matching_dg_payoff'] = c(100) - c(p.participant.vars['dg'])
-                p.participant.payoff += c(100) - c(p.participant.vars['dg'])
-            else:
-                # Person B
-                p.participant.vars['matching_dg_role'] = 'Person B'
-                matching_dg_transfer_to_me = c(self.group.get_player_by_id(p.id_in_group - 1).participant.vars['dg'])
-                p.participant.vars['matching_dg_transfer_to_me'] = matching_dg_transfer_to_me
-                p.participant.vars['matching_dg_payoff'] = matching_dg_transfer_to_me
-                p.participant.payoff += matching_dg_transfer_to_me
-            #
-            #
-            # Ultimatum Game
-            #
-            #
-            if p.id_in_group in (1, 2, 5, 6):
-                # Person A
-                p.participant.vars['matching_ug_role'] = 'Person A'
-                matching_ug_mao = c(self.group.get_player_by_id(p.id_in_group + 2).participant.vars['ug2'])
-                p.participant.vars['matching_ug_mao'] = matching_ug_mao
-                if p.participant.vars['ug1'] < matching_ug_mao:
-                    p.participant.vars['matching_ug_reject'] = True
-                    p.participant.vars['matching_ug_payoff'] = c(0)
-                    p.participant.payoff += c(0)
-                else:
-                    p.participant.vars['matching_ug_reject'] = False
-                    p.participant.vars['matching_ug_payoff'] = c(100) - c(p.participant.vars['ug1'])
-                    p.participant.payoff += c(100) - c(p.participant.vars['ug1'])
-            else:
-                # Person B
-                p.participant.vars['matching_ug_role'] = 'Person B'
-                matching_ug_offer = c(self.group.get_player_by_id(p.id_in_group - 2).participant.vars['ug1'])
-                p.participant.vars['matching_ug_offer'] = matching_ug_offer
-                if matching_ug_offer < p.participant.vars['ug2']:
-                    p.participant.vars['matching_ug_reject'] = True
-                    p.participant.vars['matching_ug_payoff'] = c(0)
-                    p.participant.payoff += c(0)
-                else:
-                    p.participant.vars['matching_ug_reject'] = False
-                    p.participant.vars['matching_ug_payoff'] = matching_ug_offer
-                    p.participant.payoff += matching_ug_offer
-            #
-            #
-            # Trust Game
-            #
-            #
-            if p.id_in_group in (3, 4, 7, 8):
-                # Person A
-                p.participant.vars['matching_tg_role'] = 'Person A'
-                if p.id_in_group in (3, 4):
-                    matching_tg_return = c(self.group.get_player_by_id(p.id_in_group + 2).participant.vars['tg2'])
-                else:
-                    matching_tg_return = c(self.group.get_player_by_id(p.id_in_group - 6).participant.vars['tg2'])
-                p.participant.vars['matching_tg_return'] = matching_tg_return
-                if p.participant.vars['tg1'] == 1:
-                    p.participant.vars['matching_tg_payoff'] = c(50)
-                    p.participant.payoff += c(50)
-                else:
-                    p.participant.vars['matching_tg_payoff'] = matching_tg_return
-                    p.participant.payoff += matching_tg_return
-            elif p.id_in_group in (1, 2, 5, 6):
-                # Person B
-                p.participant.vars['matching_tg_role'] = 'Person B'
-                if p.id_in_group in (1, 2):
-                    matching_tg_give = self.group.get_player_by_id(p.id_in_group + 6).participant.vars['tg1']
-                elif p.id_in_group in (5, 6):
-                    matching_tg_give = self.group.get_player_by_id(p.id_in_group - 2).participant.vars['tg1']
-                p.participant.vars['matching_tg_give'] = matching_tg_give
-                if matching_tg_give == 1:
-                    p.participant.vars['matching_tg_payoff'] = c(50)
-                    p.participant.payoff += c(50)
-                else:
-                    p.participant.vars['matching_tg_payoff'] = c(200) - p.participant.vars['tg2']
-                    p.participant.payoff += c(200) - p.participant.vars['tg2']
-            #
-            #
-            # Second-Party Punishment Game
-            #
-            #
-            # Transfer stage
-            if p.id_in_group in (1, 2, 3, 4):
-                matching_2pp_pd = self.group.get_player_by_id(p.id_in_group + 4).participant.vars['secondpp1']
-            else:
-                matching_2pp_pd = self.group.get_player_by_id(p.id_in_group - 4).participant.vars['secondpp1']
-            p.participant.vars['matching_2pp_pd'] = matching_2pp_pd
-            if p.participant.vars['secondpp1'] == 1:
-                if matching_2pp_pd == 1:
-                    temppayoff = c(130)
-                else:
-                    temppayoff = c(70)
-            else:
-                if matching_2pp_pd == 1:
-                    temppayoff = c(160)
-                else:
-                    temppayoff = c(100)
-            # Punishment Stage
-            if p.id_in_group in (1, 2, 3, 4):
-                matching_2pp_puncoop = c(self.group.get_player_by_id(p.id_in_group + 4).participant.vars['secondpp2'])
-                matching_2pp_pundef = c(self.group.get_player_by_id(p.id_in_group + 4).participant.vars['secondpp3'])
-            else:
-                matching_2pp_puncoop = c(self.group.get_player_by_id(p.id_in_group - 4).participant.vars['secondpp2'])
-                matching_2pp_pundef = c(self.group.get_player_by_id(p.id_in_group - 4).participant.vars['secondpp3'])
-            p.participant.vars['matching_2pp_puncoop'] = matching_2pp_puncoop
-            p.participant.vars['matching_2pp_pundef'] = matching_2pp_pundef
-            # Deal punishment
-            if matching_2pp_pd == 1:
-                temppayoff -= c(p.participant.vars['secondpp2'] / 5)
-            else:
-                temppayoff -= c(p.participant.vars['secondpp3'] / 5)
-            # Receive punishment
-            if p.participant.vars['secondpp1'] == 1:
-                temppayoff -= matching_2pp_puncoop
-            else:
-                temppayoff -= matching_2pp_pundef
-            # Set payoffs
-            p.participant.vars['matching_2pp_payoff'] = temppayoff
-            p.participant.payoff += temppayoff
-            #
-            #
-            # Third-Party Punishment
-            #
-            #
-            if p.id_in_group in (2, 4, 6, 8):
-                # Person A
-                p.participant.vars['matching_3pp_role'] = 'Person A'
-                if p.id_in_group in (2, 4, 6):
-                    matching_3pp_punishment = c(
-                        self.group.get_player_by_id(p.id_in_group + 1).participant.vars['thirdpp2'])
-                else:
-                    matching_3pp_punishment = c(
-                        self.group.get_player_by_id(1).participant.vars['thirdpp2'])
-                p.participant.vars['matching_3pp_punishment'] = matching_3pp_punishment
-                if p.participant.vars['thirdpp1'] == 1:
-                    p.participant.vars['matching_3pp_payoff'] = c(100)
-                    p.participant.payoff += c(100)
-                else:
-                    p.participant.vars['matching_3pp_payoff'] = c(130) - matching_3pp_punishment
-                    p.participant.payoff += c(130) - matching_3pp_punishment
-            else:
-                # Person C
-                p.participant.vars['matching_3pp_role'] = 'Person C'
-                if p.id_in_group in (3, 5, 7):
-                    matching_3pp_take = c(
-                        self.group.get_player_by_id(p.id_in_group - 1).participant.vars['thirdpp1'])
-                else:
-                    matching_3pp_take = c(
-                        self.group.get_player_by_id(8).participant.vars['thirdpp1'])
-                p.participant.vars['matching_3pp_take'] = matching_3pp_take
-                if matching_3pp_take == 1:
-                    p.participant.vars['matching_3pp_payoff'] = c(100)
-                    p.participant.payoff += c(100)
-                else:
-                    p.participant.vars['matching_3pp_payoff'] = c(100) - (p.participant.vars['thirdpp2'] / 5)
-                    p.participant.payoff += c(100) - (p.participant.vars['thirdpp2'] / 5)
-            #
-            #
-            # Public Goods Game
-            #
-            #
-            if p.id_in_group in (1, 3, 6, 8):
-                group = [1, 3, 6, 8]
-            else:
-                group = [2, 4, 5, 7]
-            group.remove(p.id_in_group)
-            the_rest = group
-            i = 0
-            for q in the_rest:
-                i += 1
-                p.participant.vars['matching_pgg_cont%i' % i] = c(
-                    self.group.get_player_by_id(q).participant.vars['pgg'])
-            total = p.participant.vars['matching_pgg_cont1'] + \
-                     p.participant.vars['matching_pgg_cont2'] + \
-                     p.participant.vars['matching_pgg_cont3'] + \
-                     p.participant.vars['pgg']
-            p.participant.vars['matching_pgg_payoff'] = c(100) - p.participant.vars['pgg'] + c(total / 2)
-            p.participant.payoff += c(100) - p.participant.vars['pgg'] + c(total / 2)
-            #
-            #
-            # Stag-Hunt Punishment
-            #
-            #
-            # Transfer stage
-            if p.id_in_group in (1, 3, 5, 7):
-                matching_staghunt_action = self.group.get_player_by_id(((p.id_in_group + 2) % 8) + 1).participant.vars['staghunt1']
-            else:
-                matching_staghunt_action = self.group.get_player_by_id((p.id_in_group - 3) % 8).participant.vars['staghunt1']
-            p.participant.vars['matching_staghunt_action'] = matching_staghunt_action
-            if p.participant.vars['staghunt1'] == 1:
-                if matching_staghunt_action == 1:
-                    temppayoff = c(180)
-                else:
-                    temppayoff = c(100)
-            else:
-                if matching_staghunt_action == 1:
-                    temppayoff = c(150)
-                else:
-                    temppayoff = c(150)
-            # Punishment Stage
-            if p.id_in_group in (1, 3, 5, 7):
-                matching_staghunt_pun1 = self.group.get_player_by_id(((p.id_in_group + 2) % 8) + 1).participant.vars['staghunt2']
-                matching_staghunt_pun2 = self.group.get_player_by_id(((p.id_in_group + 2) % 8) + 1).participant.vars['staghunt3']
-            else:
-                matching_staghunt_pun1 = self.group.get_player_by_id((p.id_in_group - 3) % 8).participant.vars['staghunt2']
-                matching_staghunt_pun2 = self.group.get_player_by_id((p.id_in_group - 3) % 8).participant.vars['staghunt3']
-            p.participant.vars['matching_staghunt_pun1'] = matching_staghunt_pun1
-            p.participant.vars['matching_staghunt_pun2'] = matching_staghunt_pun2
-            # Deal punishment
-            if p.participant.vars['matching_staghunt_action'] == 1:
-                temppayoff -= c(p.participant.vars['staghunt2'] / 5)
-            else:
-                temppayoff -= c(p.participant.vars['staghunt3'] / 5)
-            # Receive punishment
-            if p.participant.vars['staghunt1'] == 1:
-                temppayoff -= c(p.participant.vars['matching_staghunt_pun1'])
-            else:
-                temppayoff -= c(p.participant.vars['matching_staghunt_pun2'])
-            # Set payoffs
-            p.participant.vars['matching_staghunt_payoff'] = temppayoff
-            p.participant.payoff += temppayoff
-            #
-            #
-            # Set payoffs back to zero for simulated players and timeouts
-            #
-            #
-            if p.simulated or p.timeout_happened:
-                p.participant.payoff = c(0)
-            #
-            #
-            # Save each game payoff from participant.vars directly into models
-            #
-            #
-            p.dg_payoff = p.participant.vars['matching_dg_payoff']
-            p.ug_payoff = p.participant.vars['matching_ug_payoff']
-            p.tg_payoff = p.participant.vars['matching_tg_payoff']
-            p.secondpp_payoff = p.participant.vars['matching_2pp_payoff']
-            p.thirdpp_payoff = p.participant.vars['matching_3pp_payoff']
-            p.pgg_payoff = p.participant.vars['matching_pgg_payoff']
-            p.staghunt_payoff = p.participant.vars['matching_staghunt_payoff']
+        self.group.calculate_payoffs()
+
 
 class Payoffs(Page):
     def is_displayed(self):
@@ -365,7 +94,9 @@ class Payoffs(Page):
                 'staghunt3': self.participant.vars['staghunt3'],
                 'staghunt3_cost': self.participant.vars['staghunt3'] / 5,
                 # Overall
-                'overall_payoff': self.participant.payoff,
+                'overall_payoff': self.player.dg_payoff + self.player.pgg_payoff + self.player.secondpp_payoff + \
+                                  self.player.staghunt_payoff + self.player.tg_payoff + self.player.thirdpp_payoff + \
+                                  self.player.ug_payoff,
                 'overall_bonus_cash': self.participant.payoff.to_real_world_currency(self.session)
                 }
 
@@ -421,12 +152,35 @@ class BankAgain(Page):
             setattr(self.player, '{}_cleartext'.format(f), None)
 
 
+class Attention(Page):
+    form_model = 'player'
+    form_fields = ['attention']
+
+    def is_displayed(self):
+        return not self.player.simulated
+
+
+class Recruitment(Page):
+    form_model = 'player'
+    form_fields = ['recruitment']
+
+    def is_displayed(self):
+        return not self.player.simulated
+
+
 class ReEnterLabel(Page):
     form_model = 'player'
     form_fields = ['reenterlabel']
 
     def is_displayed(self):
         return not self.player.simulated
+
+    def reenterlabel_error_message(self, value):
+        if value is not None:
+            pattern = re.compile("^[A-Z]{3}[0-9]{2}$")
+            if pattern.match(value) is None:
+                return "That doesn't look right. Your participant label should be in the format AAA11. " \
+                       "Please try again."
 
 
 class ReEnterLabel2(Page):
@@ -435,6 +189,13 @@ class ReEnterLabel2(Page):
 
     def is_displayed(self):
         return self.player.reenterlabel != self.participant.label and not self.player.simulated
+
+    def reenterlabel2_error_message(self, value):
+        if value is not None:
+            pattern = re.compile("^[A-Z]{3}[0-9]{2}$")
+            if pattern.match(value) is None:
+                return "That doesn't look right. Your participant label should be in the format AAA11. " \
+                       "Please try again."
 
 
 class Final(Page):
@@ -448,6 +209,8 @@ page_sequence = [
     TimeoutHappened,
     Payment,
     BankAgain,
+    Attention,
+    Recruitment,
     ReEnterLabel,
     ReEnterLabel2,
     Final
