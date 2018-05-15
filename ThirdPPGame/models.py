@@ -38,7 +38,7 @@ class Player(BasePlayer):
     thirdpp1 = models.IntegerField(
         label="If you are Person A, will you take from Person B?",
         choices=[
-            [1, "Don't Take"],
+            [1, "Don't take"],
             [2, 'Take']],
         widget=widgets.RadioSelect
     )

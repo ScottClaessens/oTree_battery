@@ -13,10 +13,10 @@ class GroupingWaitPage(WaitPage):
     group_by_arrival_time = True
 
     title_text = "Matching you to other participants... Please wait..."
-    body_text = "Thank you for completing all the decisions. We will now match you with other participants. Since " \
-                "some participants are slower than others, please be patient. When we have successfully matched " \
-                "you with other participants, you will see a screen with the results of all the interactions, and " \
-                "your earnings."
+    body_text = "Thank you for completing all the tasks. We will now match you with other participants. Since " \
+                "some participants are slower than others, please be patient while we wait for them to finish too. " \
+                "We apologise if this takes some time. However, if anyone takes longer than the allotted hour, we " \
+                "will skip them forward to this screen, so you shouldn't have to wait too long."
 
     def after_all_players_arrive(self):
         self.group.dropouts_and_simulated()
@@ -24,10 +24,10 @@ class GroupingWaitPage(WaitPage):
 
 class CalculateWaitPage(WaitPage):
     title_text = "Matching you to other participants... Please wait..."
-    body_text = "Thank you for completing all the decisions. We will now match you with other participants. Since " \
-                "some participants are slower than others, please be patient. When we have successfully matched " \
-                "you with other participants, you will see a screen with the results of all the interactions, and " \
-                "your earnings."
+    body_text = "Thank you for completing all the tasks. We will now match you with other participants. Since " \
+                "some participants are slower than others, please be patient while we wait for them to finish too. " \
+                "We apologise if this takes some time. However, if anyone takes longer than the allotted hour, we " \
+                "will skip them forward to this screen, so you shouldn't have to wait too long."
 
     def after_all_players_arrive(self):
         self.group.calculate_payoffs()

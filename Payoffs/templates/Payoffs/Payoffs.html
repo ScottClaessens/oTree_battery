@@ -12,7 +12,11 @@
     match you with, we have instead matched you with average decisions based on previous research.
 </p>
 <p>
-    Below are the results of each of the interactions.
+    For each task, we randomly allocated you to a role (if there were multiple roles) and determined the payoffs for
+    you and the participant you were matched to.
+</p>
+<p>
+    Below are the results of each of the tasks.
 </p>
 
 <br>
@@ -30,7 +34,7 @@
 {% else %}
     <p>Person A transferred {{matching_dg_transfer_to_me}} to you.</p>
 {% endif %}
-<p>Your payoff for this game was <b>{{matching_dg_payoff}}</b>.</p>
+<p>Your payoff for this task was <b>{{matching_dg_payoff}}</b>.</p>
 
 {% elif i == "UltimatumGame" %}
 <p>In this task, you were assigned the role of {{matching_ug_role}}.
@@ -47,7 +51,7 @@
     {% if matching_ug_reject %}However, your minimum acceptable offer was {{ug2}}, and so you rejected their offer.
     {% else %}Your minimum acceptable offer of {{ug2}} was below this, and so you accepted their offer.{% endif %}</p>
 {% endif %}
-<p>Your payoff for this game was <b>{{matching_ug_payoff}}</b>.</p>
+<p>Your payoff for this task was <b>{{matching_ug_payoff}}</b>.</p>
 
 {% elif i == "TrustGame" %}
 <p>In this task, you were assigned the role of {{matching_tg_role}}. Both people started with {{50|c}}.</p>
@@ -66,7 +70,7 @@
     {{tg2}}.</p>
     {% endif %}
 {% endif %}
-<p>Your payoff for this game was <b>{{matching_tg_payoff}}</b>.</p>
+<p>Your payoff for this task was <b>{{matching_tg_payoff}}</b>.</p>
 
 {% elif i == "SecondPPGame" %}
 <p>In this task, both people started with {{100|c}}.</p>
@@ -115,7 +119,7 @@
     <p>The other person did not remove any points from you.</p>
     {% endif %}
 {% endif %}
-<p>Your payoff from both phases of this game was <b>{{matching_2pp_payoff}}</b>.</p>
+<p>Your payoff from both phases of this task was <b>{{matching_2pp_payoff}}</b>.</p>
 
 {% elif i == "ThirdPPGame" %}
 <p>In this task, you were assigned the role of {{matching_3pp_role}}. All people started with {{100|c}}.</p>
@@ -142,21 +146,21 @@
         {% endif %}
     {% endif %}
 {% endif %}
-<p>Your payoff for this game was <b>{{matching_3pp_payoff}}</b>.</p>
+<p>Your payoff for this task was <b>{{matching_3pp_payoff}}</b>.</p>
 
 {% elif i == "PublicGoodsGame" %}
 <p>In this task, all four people started with {{100|c}}.</p>
 <p>You contributed {{pgg}} to the group project. The other group members contributed {{matching_pgg_cont1}},
 {{matching_pgg_cont2}}, and {{matching_pgg_cont3}}. The total number of points was doubled and divided evenly
     between all people. This was added to your remaining points.</p>
-<p>Your payoff for this game was <b>{{matching_pgg_payoff}}</b>.</p>
+<p>Your payoff for this task was <b>{{matching_pgg_payoff}}</b>.</p>
 
 {% elif i == "StagHuntGame" %}
 <p>In this task, both people started with {{100|c}}.</p>
 {% if staghunt1 == 1 %}
     {% if matching_staghunt_action == 1 %}
         <p>In Phase 1, both people chose to transfer {{30|c}} to the group project. The group project was successful,
-        and so the points in the group project were doubled and distributed evenly between both players.
+        and so the points in the group project were doubled and distributed evenly between both people.
         At the end of Phase 1, therefore, your payoff was {{130|c}}.</p>
     {% elif matching_staghunt_action == 2 %}
         <p>In Phase 1, you chose to transfer {{30|c}} to the group project, but the other person did not. The group
@@ -201,7 +205,7 @@
     <p>The other person did not remove any points from you.</p>
     {% endif %}
 {% endif %}
-<p>Your payoff from both phases of this game was <b>{{matching_staghunt_payoff}}</b>.</p>
+<p>Your payoff from both phases of this task was <b>{{matching_staghunt_payoff}}</b>.</p>
 
 {% endif %}
 

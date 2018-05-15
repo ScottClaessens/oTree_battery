@@ -18,40 +18,48 @@
         This task has two phases. In each phase, both people choose at the same time.
     </p>
     <p>
-        Phase 1:
+        <u>Phase 1</u>
+    </p>
+    <p>
+        In Phase 1, both people will choose whether to transfer 30 of their points to a group project or not.
+        The group project is only successful if <i>both people</i> transfer points to it.
+    </p>
+        <ul>
+            <li>
+                If <i>both people</i> transfer, then the group project is successful.
+                This means that the 60 points in the group project will be doubled
+                and distributed evenly between both people.
+                Each person will end Phase 1 with 130 points (100 - 30 transferred + 60 received).
+            </li>
+            <li>
+                If <i>only one person</i> transfers, then the group project is not
+                successful and the points in it are lost. In this case, the person
+                transferring points ends Phase 1 with 70 points
+                (100 - 30 transferred). The other person keeps their 100 points.
+            </li>
+            <li>
+                If <i>neither person</i> transfers, they keep the 100 points they had to start with.
+            </li>
+        </ul>
+    <p>
+        There are four possible outcomes in Phase 1:
     </p>
     <ol>
-        <li>
-            First, both people will choose whether to transfer 30 of their points to a group project.
-            <ul>
-                <li>
-                    If <i>both people</i> transfer 30 points, then the group project is
-                    successful. This means that the 60 points in the group project will be doubled
-                    and distributed evenly between both players. Each person will end the phase with 130 points
-                    (100 - 30 transferred + 60 received).
-                </li>
-                <li>
-                    If <i>only one person</i> transfers 30 points, then the group project is not
-                    successful. In this case, the person transferring points will lose those 30 points. The other
-                    person gets to keep their 100 points.
-                </li>
-                <li>
-                    If <i>neither person</i> transfers 30 points, then they simply keep the 100
-                    points they had to start with.
-                </li>
-            </ul>
-        </li>
+        <li>Both people transfer; both people end the phase with 130 points.</li>
+        <li>Person A transfers, but Person B does not; Person A ends the phase with 70 points,
+        while Person B ends the phase with 100 points.</li>
+        <li>Person A does not transfer, but Person B does; Person A ends the phase with 100 points,
+        while Person B ends the phase with 70 points.</li>
+        <li>Neither person transfers; both people end the phase with 100 points.</li>
     </ol>
     <p>
-        Phase 2:
+        <u>Phase 2</u>
     </p>
-    <ol start="2">
-        <li>Based on the other person's decision in Phase 1, each person then chooses whether they want to
-            remove up to 50 points from the other person. For every 5 points someone wants to remove from the other person,
-            they must pay 1 point.</li>
-    </ol>
+        In Phase 2, each person then chooses whether they want to remove up to 50 points from the other person,
+        based on the other person's decision in Phase 1. For every 5 points someone wants to remove from the other
+        person, they must pay 1 point.
     <p>
-        The graphic below shows a summary of the interaction:
+        The graphic below shows a summary of the task:
     </p>
     <img src="{% static "StagHuntGame/stag.JPG" %}"/>
 </div>
