@@ -99,6 +99,14 @@ class Recruitment(Page):
         return not self.player.simulated
 
 
+class Feedback(Page):
+    form_model = 'player'
+    form_fields = ['feedback']
+
+    def is_displayed(self):
+        return not self.player.simulated
+
+
 class ReEnterLabel(Page):
     form_model = 'player'
     form_fields = ['reenterlabel']
@@ -141,6 +149,7 @@ page_sequence = [
     BankAgain,
     Attention,
     Recruitment,
+    Feedback,
     ReEnterLabel,
     ReEnterLabel2,
     Final

@@ -380,7 +380,12 @@ class Player(BasePlayer):
         widget=widgets.RadioSelect
     )
 
-    reenterlabel  = models.StringField(label='Please re-enter your participant label below. '
+    feedback = models.LongStringField(
+        blank=True,
+        label="If you would like to leave us any feedback about this study, please do so below"
+    )
+
+    reenterlabel = models.StringField(label='Please re-enter your participant label below. '
                                              'This can be found in your original email.')
     reenterlabel2 = models.StringField(label='The participant label you entered does not match the one you entered at '
                                              'the start of the study. Please double-check your email, and try entering '

@@ -25,6 +25,7 @@ class PlayerBot(Bot):
         yield (pages.BankAgain, {'correct_details': 1})
         yield (pages.Attention, {'attention': 6})
         yield (pages.Recruitment, {'recruitment': 1})
+        yield (pages.Feedback, {'feedback': "No feedback"})
         yield (pages.ReEnterLabel, {'reenterlabel': 'AAA11'})
         yield (pages.ReEnterLabel2, {'reenterlabel2': 'AAA11'})
         yield Submission(pages.Final, check_html=False)
