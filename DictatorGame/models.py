@@ -37,7 +37,7 @@ class Player(BasePlayer):
     )
 
     dg = models.CurrencyField(
-        label="If you are Person A in the interaction, how many points will you transfer to Person B? [0 - 100]",
+        label="If you are Person A, how many points will you transfer to Person B? [0 - 100]",
         min=0,
         max=100,
     )

@@ -12,12 +12,12 @@ cipher = PKCS1_OAEP.new(public_key)
 class CalculateWaitPage(WaitPage):
     wait_for_all_groups = True
     title_text = "Matching you to other participants... Please wait..."
-    body_text = "Thank you for completing all the tasks. We will now match you with other participants. Since " \
-                "some participants are slower than others, please be patient while we wait for them to finish too. " \
-                "We apologise if this takes some time. However, if anyone takes longer than the allotted hour, we " \
-                "will skip them forward to this screen, so you shouldn't have to wait too long. NOTE: YOU MAY LEAVE " \
-                "THIS SCREEN AND COME BACK TO IT LATER - AFTER THIS SCREEN, YOU CAN FINISH THE REST OF THE STUDY AT " \
-                "YOUR OWN PACE."
+    body_text = "Thank you for completing all the tasks. We will now randomly match you with other participants. " \
+                "Since some participants are slower than others, please be patient while we wait for them to finish " \
+                "too. We apologise if this takes some time. However, if anyone takes longer than the allotted hour, " \
+                "we will skip them forward to this screen, so you shouldn't have to wait too long. NOTE: YOU MAY " \
+                "LEAVE THIS SCREEN AND COME BACK TO IT LATER - AFTER THIS SCREEN, YOU CAN FINISH THE REST OF THE " \
+                "STUDY AT YOUR OWN PACE."
 
     def after_all_players_arrive(self):
         self.subsession.dropouts_and_simulated()
