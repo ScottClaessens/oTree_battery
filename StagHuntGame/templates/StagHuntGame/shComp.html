@@ -1,0 +1,20 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree %}
+
+{% block title %}
+    Task {{game_number}}
+{% endblock %}
+
+{% block content %}
+
+<p>
+    Before the task, please answer the following comprehension question carefully.
+</p>
+
+{% formfield player.comprehension %}
+
+{% next_button %}
+
+{% include Constants.shInstructions %}
+
+{% endblock %}

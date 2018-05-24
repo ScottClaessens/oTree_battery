@@ -17,9 +17,9 @@ import time
 
 
 def get_new_sequence_of_apps(app_sequence):
-    the_rest = app_sequence[1:8]
+    the_rest = app_sequence[1:9]
     random.shuffle(the_rest)
-    app_sequence = [app_sequence[0]] + the_rest + [app_sequence[8]]
+    app_sequence = [app_sequence[0]] + the_rest + [app_sequence[9]]
     return app_sequence
 
 

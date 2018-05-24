@@ -119,7 +119,7 @@ mturk_hit_settings = {
 # e.g. self.session.config['participation_fee']
 
 SESSION_CONFIG_DEFAULTS = {
-    'real_world_currency_per_point': 0.04,
+    'real_world_currency_per_point': 0.03,
     'participation_fee': 20.00,
     'doc': "",
     'mturk_hit_settings': mturk_hit_settings,
@@ -133,6 +133,7 @@ SESSION_CONFIGS = [
         'num_demo_participants': 8,
         'app_sequence': ['Instructions',
                          'StagHuntGame',
+                         'StagHuntGamewithPunishment',
                          'TrustGame',
                          'PublicGoodsGame',
                          'UltimatumGame',

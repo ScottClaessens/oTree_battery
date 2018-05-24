@@ -12,8 +12,8 @@
     match you with, we have instead matched you with average decisions based on previous research.
 </p>
 <p>
-    For each task, we randomly allocated you to a role (if there were multiple roles) and determined the payoffs for
-    you and the participant you were matched to.
+    For each task, we randomly assigned you to a role (if there were multiple roles) and determined the payoffs for
+    you and the participant(s) you were matched to.
 </p>
 <p>
     Below are the results of each of the tasks.
@@ -156,6 +156,27 @@
 <p>Your payoff for this task was <b>{{matching_pgg_payoff}}</b>.</p>
 
 {% elif i == "StagHuntGame" %}
+<p>In this task, all four people started with {{100|c}}.</p>
+{% if sh == 1 %}
+    <p>You chose to contribute 30 points to the group project.</p>
+{% else %}
+    <p>You chose not to contribute 30 points to the group project.</p>
+{% endif %}
+{% if matching_sh_count == 4 %}
+    <p>Overall, all group members contributed, and so the group project was successful. 120 points were doubled and
+    distributed evenly between all group members.</p>
+{% elif matching_sh_count == 1 %}
+    <p>Overall, only 1 group member contributed, and so the group project was unsuccessful. All points
+    in it were lost.</p>
+{% elif matching_sh_count == 0 %}
+    <p>Overall, no one contributed to the group project.</p>
+{% else %}
+    <p>Overall, only {{matching_sh_count}} group members contributed, and so the group project was unsuccessful. All points
+    in it were lost.</p>
+{% endif %}
+<p>Your payoff for this task was <b>{{matching_sh_payoff}}</b>.</p>
+
+{% elif i == "StagHuntGamewithPunishment" %}
 <p>In this task, both people started with {{100|c}}.</p>
 {% if staghunt1 == 1 %}
     {% if matching_staghunt_action == 1 %}
@@ -214,9 +235,13 @@
 {% endfor %}
 
 <p><b>
-    Your overall payoff for the study was {{overall_payoff}}.
-    This means that your bonus for the study is {{overall_bonus_cash}}
+    Your overall payoff from all tasks was {{overall_payoff}}.
+    This means that your bonus for the study is {{overall_bonus_cash}}.
 </b></p>
+
+<p>
+    If for some reason, your bonus for the study ended up less than $10, then we have rounded it up to $10.
+</p>
 
 <p>
     Click Next to see a summary of your reimbursement for the whole study, and to provide your bank account details.

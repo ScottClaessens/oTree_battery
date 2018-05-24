@@ -9,28 +9,19 @@ public_key = get_public_key()
 cipher = PKCS1_OAEP.new(public_key)
 
 
-class GroupingWaitPage(WaitPage):
-    group_by_arrival_time = True
-
-    title_text = "Matching you to other participants... Please wait..."
-    body_text = "Thank you for completing all the tasks. We will now match you with other participants. Since " \
-                "some participants are slower than others, please be patient while we wait for them to finish too. " \
-                "We apologise if this takes some time. However, if anyone takes longer than the allotted hour, we " \
-                "will skip them forward to this screen, so you shouldn't have to wait too long."
-
-    def after_all_players_arrive(self):
-        self.group.dropouts_and_simulated()
-
-
 class CalculateWaitPage(WaitPage):
+    wait_for_all_groups = True
     title_text = "Matching you to other participants... Please wait..."
     body_text = "Thank you for completing all the tasks. We will now match you with other participants. Since " \
                 "some participants are slower than others, please be patient while we wait for them to finish too. " \
                 "We apologise if this takes some time. However, if anyone takes longer than the allotted hour, we " \
-                "will skip them forward to this screen, so you shouldn't have to wait too long."
+                "will skip them forward to this screen, so you shouldn't have to wait too long. NOTE: YOU MAY LEAVE " \
+                "THIS SCREEN AND COME BACK TO IT LATER - AFTER THIS SCREEN, YOU CAN FINISH THE REST OF THE STUDY AT " \
+                "YOUR OWN PACE."
 
     def after_all_players_arrive(self):
-        self.group.calculate_payoffs()
+        self.subsession.dropouts_and_simulated()
+        self.subsession.shuffle_groups_and_calculate_payoffs()
 
 
 class Payoffs(Page):
@@ -38,67 +29,7 @@ class Payoffs(Page):
         return not self.player.timeout_happened and not self.player.simulated
 
     def vars_for_template(self):
-        return {'sequence_of_apps': self.participant.vars['sequence_of_apps'][1:8],
-                # Dictator Game
-                'matching_dg_role': self.participant.vars['matching_dg_role'],
-                'matching_dg_transfer_to_me': self.participant.vars['matching_dg_transfer_to_me'],
-                'matching_dg_payoff': self.participant.vars['matching_dg_payoff'],
-                'dg': self.participant.vars['dg'],
-                # Ultimatum Game
-                'matching_ug_role': self.participant.vars['matching_ug_role'],
-                'matching_ug_mao': self.participant.vars['matching_ug_mao'],
-                'matching_ug_offer': self.participant.vars['matching_ug_offer'],
-                'matching_ug_reject': self.participant.vars['matching_ug_reject'],
-                'matching_ug_payoff': self.participant.vars['matching_ug_payoff'],
-                'ug1': self.participant.vars['ug1'],
-                'ug2': self.participant.vars['ug2'],
-                # Trust Game
-                'matching_tg_role': self.participant.vars['matching_tg_role'],
-                'matching_tg_give': self.participant.vars['matching_tg_give'],
-                'matching_tg_return': self.participant.vars['matching_tg_return'],
-                'matching_tg_payoff': self.participant.vars['matching_tg_payoff'],
-                'tg1': self.participant.vars['tg1'],
-                'tg2': self.participant.vars['tg2'],
-                # Second-Party Punishment Game
-                'matching_2pp_pd': self.participant.vars['matching_2pp_pd'],
-                'matching_2pp_puncoop': self.participant.vars['matching_2pp_puncoop'],
-                'matching_2pp_pundef': self.participant.vars['matching_2pp_pundef'],
-                'matching_2pp_payoff': self.participant.vars['matching_2pp_payoff'],
-                'secondpp1': self.participant.vars['secondpp1'],
-                'secondpp2': self.participant.vars['secondpp2'],
-                'secondpp2_cost': self.participant.vars['secondpp2'] / 5,
-                'secondpp3': self.participant.vars['secondpp3'],
-                'secondpp3_cost': self.participant.vars['secondpp3'] / 5,
-                # Third-Party Punishment Game
-                'matching_3pp_role': self.participant.vars['matching_3pp_role'],
-                'matching_3pp_take': self.participant.vars['matching_3pp_take'],
-                'matching_3pp_punishment': self.participant.vars['matching_3pp_punishment'],
-                'matching_3pp_payoff': self.participant.vars['matching_3pp_payoff'],
-                'thirdpp1': self.participant.vars['thirdpp1'],
-                'thirdpp2': self.participant.vars['thirdpp2'],
-                'thirdpp2_cost': self.participant.vars['thirdpp2'] / 5,
-                # Public Goods Game
-                'matching_pgg_cont1': self.participant.vars['matching_pgg_cont1'],
-                'matching_pgg_cont2': self.participant.vars['matching_pgg_cont2'],
-                'matching_pgg_cont3': self.participant.vars['matching_pgg_cont3'],
-                'matching_pgg_payoff': self.participant.vars['matching_pgg_payoff'],
-                'pgg': self.participant.vars['pgg'],
-                # Stag Hunt Game with Punishment
-                'matching_staghunt_action': self.participant.vars['matching_staghunt_action'],
-                'matching_staghunt_pun1': self.participant.vars['matching_staghunt_pun1'],
-                'matching_staghunt_pun2': self.participant.vars['matching_staghunt_pun2'],
-                'matching_staghunt_payoff': self.participant.vars['matching_staghunt_payoff'],
-                'staghunt1': self.participant.vars['staghunt1'],
-                'staghunt2': self.participant.vars['staghunt2'],
-                'staghunt2_cost': self.participant.vars['staghunt2'] / 5,
-                'staghunt3': self.participant.vars['staghunt3'],
-                'staghunt3_cost': self.participant.vars['staghunt3'] / 5,
-                # Overall
-                'overall_payoff': self.player.dg_payoff + self.player.pgg_payoff + self.player.secondpp_payoff + \
-                                  self.player.staghunt_payoff + self.player.tg_payoff + self.player.thirdpp_payoff + \
-                                  self.player.ug_payoff,
-                'overall_bonus_cash': self.participant.payoff.to_real_world_currency(self.session)
-                }
+        return self.player.payoff_vars()
 
 
 class TimeoutHappened(Page):
@@ -203,7 +134,6 @@ class Final(Page):
 
 
 page_sequence = [
-    GroupingWaitPage,
     CalculateWaitPage,
     Payoffs,
     TimeoutHappened,

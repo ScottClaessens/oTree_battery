@@ -1,0 +1,16 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree %}
+
+{% block title %}
+    Task {{game_number}}
+{% endblock %}
+
+{% block content %}
+
+{% formfield player.sh %}
+
+{% next_button %}
+
+{% include Constants.shInstructions %}
+
+{% endblock %}

@@ -7,7 +7,7 @@ from otree.api import (
 author = 'Scott Claessens'
 
 doc = """
-Stag Hunt Game with Punishment
+Stag Hunt Game
 """
 
 
@@ -16,7 +16,7 @@ class Constants(BaseConstants):
     players_per_group = None
     num_rounds = 1
 
-    staghuntInstructions = 'StagHuntGame/staghuntInstructions.html'
+    shInstructions = 'StagHuntGame/shInstructions.html'
 
 
 class Subsession(BaseSubsession):
@@ -29,31 +29,19 @@ class Group(BaseGroup):
 
 class Player(BasePlayer):
     comprehension = models.IntegerField(
-        label="If you transfer 30 points to the group project, but the other person does not, how many points will "
-              "you have at the end of Phase 1?",
+        label="If you contribute 30 points to the group project, but no one else does, how many points do you end "
+              "this game with?",
         choices=[
-            [1, '130 points (100 start + 30)'],
-            [2, '100 points (100 start + 0)'],
-            [3, '70 points (100 start - 30)']],
+            [1, '130 points'],
+            [2, '100 points'],
+            [3, '70 points']],
         widget=widgets.RadioSelect
     )
 
-    staghunt1 = models.IntegerField(
-        label="Will you transfer 30 points to the group project?",
+    sh = models.IntegerField(
+        label="Will you contribute 30 points to the group project?",
         choices=[
-            [1, 'Transfer 30 points'],
-            [2, 'No transfer']],
+            [1, 'Contribute 30 points'],
+            [2, 'Do not contribute 30 points']],
         widget=widgets.RadioSelect
-    )
-
-    staghunt2 = models.CurrencyField(
-        label="If the other DOES TRANSFER, I will remove this many points... [0 - 50]",
-        min=0,
-        max=50
-    )
-
-    staghunt3 = models.CurrencyField(
-        label="If the other DOESN'T TRANSFER, I will remove this many points... [0 - 50]",
-        min=0,
-        max=50
     )

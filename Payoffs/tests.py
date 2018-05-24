@@ -10,11 +10,11 @@ import random
 class PlayerBot(Bot):
 
     def play_round(self):
-        # p = self.player.id_in_group
-        # file_name = "player{0}.html".format(p)
-        # f = open(file_name, 'w')
-        # f.write(self.html)
-        # f.close()
+        p = self.participant.id_in_session
+        file_name = "player{0}.html".format(p)
+        f = open(file_name, 'w')
+        f.write(self.html)
+        f.close()
         yield (pages.Payoffs)
         yield SubmissionMustFail(pages.Payment, {'first_name_cleartext': 'Scott',
                                                  'last_name_cleartext': 'Claessens',

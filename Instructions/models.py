@@ -69,7 +69,7 @@ class Subsession(BaseSubsession):
             p.participant.vars['matching_pgg_cont3'] = None
             p.participant.vars['matching_pgg_payoff'] = None
             p.participant.vars['pgg'] = None
-            # Stag Hunt Game
+            # Stag Hunt Game with Punishment
             p.participant.vars['matching_staghunt_action'] = None
             p.participant.vars['matching_staghunt_pun1'] = None
             p.participant.vars['matching_staghunt_pun2'] = None
@@ -77,6 +77,10 @@ class Subsession(BaseSubsession):
             p.participant.vars['staghunt1'] = None
             p.participant.vars['staghunt2'] = None
             p.participant.vars['staghunt3'] = None
+            # Stag Hunt (no punishment)
+            p.participant.vars['matching_sh_count'] = None
+            p.participant.vars['matching_sh_payoff'] = None
+            p.participant.vars['sh'] = None
 
 
 class Group(BaseGroup):

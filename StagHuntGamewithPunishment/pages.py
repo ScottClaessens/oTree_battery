@@ -32,26 +32,34 @@ class BasePage(Page):
             self.participant.vars['timeout_game_number'] = self.participant.vars['game_number']
 
 
-class shIntro(BasePage):
+class staghuntpunIntro(BasePage):
     pass
 
 
-class shComp(BasePage):
+class staghuntpunComp(BasePage):
     form_model = 'player'
     form_fields = ['comprehension']
 
 
-class shDecision(BasePage):
+class staghuntpun1(BasePage):
     form_model = 'player'
-    form_fields = ['sh']
+    form_fields = ['staghunt1']
+
+
+class staghuntpun2(BasePage):
+    form_model = 'player'
+    form_fields = ['staghunt2', 'staghunt3']
 
     def before_next_page(self):
         self.participant.vars['game_number'] += 1
-        self.participant.vars['sh'] = self.player.sh
+        self.participant.vars['staghunt1'] = self.player.staghunt1
+        self.participant.vars['staghunt2'] = self.player.staghunt2
+        self.participant.vars['staghunt3'] = self.player.staghunt3
 
 
 page_sequence = [
-    shIntro,
-    shComp,
-    shDecision
+    staghuntpunIntro,
+    staghuntpunComp,
+    staghuntpun1,
+    staghuntpun2
 ]
