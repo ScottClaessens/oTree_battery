@@ -8,5 +8,8 @@ from .models import Constants
 class PlayerBot(Bot):
     def play_round(self):
         yield (pages.shIntro)
-        yield (pages.shComp, {'comprehension': 1})
+        if random.uniform(0, 1) < 0.9:
+            yield (pages.shComp, {'comprehension': 3})
+        else:
+            yield (pages.shComp, {'comprehension': 1})
         yield (pages.shDecision, {'sh': c(random.randint(1, 2))})

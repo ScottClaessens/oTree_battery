@@ -7,6 +7,9 @@ from .models import Constants
 
 class PlayerBot(Bot):
     def play_round(self):
-        yield(pages.dgIntro)
-        yield(pages.dgComp, {'comprehension': 1})
-        yield(pages.dgDecision, {'dg': c(random.randint(1,100))})
+        yield (pages.dgIntro)
+        if random.uniform(0, 1) < 0.9:
+            yield (pages.dgComp, {'comprehension': 1})
+        else:
+            yield (pages.dgComp, {'comprehension': 2})
+        yield (pages.dgDecision, {'dg': c(random.randint(1,100))})

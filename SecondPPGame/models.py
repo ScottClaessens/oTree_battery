@@ -31,7 +31,7 @@ class Player(BasePlayer):
     comprehension = models.IntegerField(
         label="If Person B transfers and Person A doesn't, how many points will they each have at the end of Phase 1?",
         choices=[
-            [1, 'A will have 100 (100 start  - 0 transferred), B will have 130 (100 start - 30 transferred + 60 gotten)'],
+            [1, 'A will have 100 (100 start - 0 transferred), B will have 130 (100 start - 30 transferred + 60 gotten)'],
             [2, 'A will have 160 (100 start + 60 gotten - 0 transferred), B will have 70 (100 start - 30 transferred)'],
             [3, 'Both will have 130']],
         widget=widgets.RadioSelect

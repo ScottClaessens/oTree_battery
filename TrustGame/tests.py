@@ -7,7 +7,10 @@ import random
 class PlayerBot(Bot):
     def play_round(self):
         yield (pages.tgIntro)
-        yield (pages.tgComp, {'comprehension': 1})
-        yield (pages.tg1, {'tg1': random.randint(1,2)})
-        yield (pages.tg2, {'tg2': c(random.randint(1,150))})
+        if random.uniform(0, 1) < 0.9:
+            yield (pages.tgComp, {'comprehension': 1})
+        else:
+            yield (pages.tgComp, {'comprehension': 2})
+        yield (pages.tg1, {'tg1': random.randint(1, 2)})
+        yield (pages.tg2, {'tg2': c(random.randint(1, 150))})
 
