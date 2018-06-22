@@ -43,7 +43,7 @@ class Subsession(BaseSubsession):
                 p.participant.vars['dg'] = c(25)         # 25
                 p.participant.vars['ug1'] = c(40)        # 40
                 p.participant.vars['ug2'] = c(25)        # 25
-                p.participant.vars['tg1'] = 2            # 2
+                p.participant.vars['tg1'] = 1            # 2
                 p.participant.vars['tg2'] = c(75)        # 75
                 p.participant.vars['secondpp1'] = 1      # 1
                 p.participant.vars['secondpp2'] = c(0)   # 0
@@ -156,7 +156,7 @@ class Subsession(BaseSubsession):
                     p.participant.vars['matching_tg_role'] = 'Person A'
                     matching_tg_return = c(g.get_player_by_id(p.id_in_group + 1).participant.vars['tg2'])
                     p.participant.vars['matching_tg_return'] = matching_tg_return
-                    if p.participant.vars['tg1'] == 1:
+                    if p.participant.vars['tg1'] == 0:
                         p.participant.vars['matching_tg_payoff'] = c(50)
                         p.participant.payoff += c(50)
                     else:
@@ -167,7 +167,7 @@ class Subsession(BaseSubsession):
                     p.participant.vars['matching_tg_role'] = 'Person B'
                     matching_tg_give = g.get_player_by_id(p.id_in_group - 1).participant.vars['tg1']
                     p.participant.vars['matching_tg_give'] = matching_tg_give
-                    if matching_tg_give == 1:
+                    if matching_tg_give == 0:
                         p.participant.vars['matching_tg_payoff'] = c(50)
                         p.participant.payoff += c(50)
                     else:
@@ -356,21 +356,6 @@ class Player(BasePlayer):
         widget=widgets.RadioSelect
     )
 
-    attention = models.IntegerField(
-        label="Research shows that people may not pay attention when answering questions. If you are reading this "
-              "question, please select the last choice - the one at the very bottom of the list. Thank you for "
-              "participating and taking the time to read through the questions carefully. What is this study about?",
-        choices=[
-            [1, 'Risk taking'],
-            [2, 'Economic decisions'],
-            [3, 'Managing resources'],
-            [4, 'Issues of religion'],
-            [5, 'Issues of society'],
-            [6, 'Issues of geography']
-        ],
-        widget=widgets.RadioSelect
-    )
-
     recruitment = models.IntegerField(
         label="Would you like to be contacted about future studies similar to this one?",
         choices=[
@@ -394,6 +379,7 @@ class Player(BasePlayer):
                                              'responses here with your previous NZAVS responses.')
 
     total_payment = models.FloatField()
+    time_spent = models.IntegerField()
     timeout_happened = models.BooleanField()
     simulated = models.BooleanField()
 

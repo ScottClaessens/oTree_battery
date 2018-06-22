@@ -41,7 +41,7 @@ class Player(BasePlayer):
         label="Will you transfer 30 points to the other person?",
         choices=[
             [1, 'Transfer'],
-            [2, "Don't transfer"]],
+            [0, "Don't transfer"]],
         widget=widgets.RadioSelect
     )
 

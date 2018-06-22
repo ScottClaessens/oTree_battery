@@ -39,7 +39,7 @@ class Player(BasePlayer):
         label="If you are Person A, will you take from Person B?",
         choices=[
             [1, "Don't take"],
-            [2, 'Take']],
+            [0, 'Take']],
         widget=widgets.RadioSelect
     )
 

@@ -42,7 +42,7 @@ class Player(BasePlayer):
         label="Will you transfer 30 points to the group project?",
         choices=[
             [1, 'Transfer 30 points'],
-            [2, 'No transfer']],
+            [0, 'No transfer']],
         widget=widgets.RadioSelect
     )
 

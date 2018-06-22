@@ -12,5 +12,5 @@ class PlayerBot(Bot):
             yield (pages.ugComp, {'comprehension': 3})
         else:
             yield (pages.ugComp, {'comprehension': 1})
-        yield (pages.ug1, {'ug1': c(random.randint(1,100))})
-        yield (pages.ug2, {'ug2': random.randint(1,100)})
+        yield (pages.ug1, {'ug1': c(random.randint(1, 100))})
+        yield (pages.ug2, {'ug2': random.randint(1, 100)})

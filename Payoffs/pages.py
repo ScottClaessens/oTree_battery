@@ -4,6 +4,7 @@ from .models import Constants
 from Cryptodome.Cipher import PKCS1_OAEP
 from Payoffs.management.commands.crypto_pps import get_public_key
 import re
+import time
 
 public_key = get_public_key()
 cipher = PKCS1_OAEP.new(public_key)
@@ -16,7 +17,7 @@ class CalculateWaitPage(WaitPage):
                 "Since some participants are slower than others, please be patient while we wait for them to finish " \
                 "too. We apologise if this takes some time. However, if anyone takes longer than the allotted hour, " \
                 "we will skip them forward to this screen, so you shouldn't have to wait too long. NOTE: YOU MAY " \
-                "LEAVE THIS SCREEN AND COME BACK TO IT LATER - AFTER THIS SCREEN, YOU CAN FINISH THE REST OF THE " \
+                "LEAVE THIS SCREEN OPEN AND COME BACK TO IT LATER - AFTER THIS SCREEN, YOU CAN FINISH THE REST OF THE " \
                 "STUDY AT YOUR OWN PACE."
 
     def after_all_players_arrive(self):
@@ -83,14 +84,6 @@ class BankAgain(Page):
             setattr(self.player, '{}_cleartext'.format(f), None)
 
 
-class Attention(Page):
-    form_model = 'player'
-    form_fields = ['attention']
-
-    def is_displayed(self):
-        return not self.player.simulated
-
-
 class Recruitment(Page):
     form_model = 'player'
     form_fields = ['recruitment']
@@ -121,6 +114,9 @@ class ReEnterLabel(Page):
                 return "That doesn't look right. Your participant label should be in the format AAA11. " \
                        "Please try again."
 
+    def before_next_page(self):
+        self.player.time_spent = time.time() - self.participant.vars['start.time']
+
 
 class ReEnterLabel2(Page):
     form_model = 'player'
@@ -147,7 +143,6 @@ page_sequence = [
     TimeoutHappened,
     Payment,
     BankAgain,
-    Attention,
     Recruitment,
     Feedback,
     ReEnterLabel,

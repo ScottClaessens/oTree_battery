@@ -38,8 +38,8 @@ class Player(BasePlayer):
     tg1 = models.IntegerField(
         label="If you are Person A, do you want to transfer your 50 points to Person B?",
         choices=[
-            [1, 'No transfer'],
-            [2, 'Transfer 50 points']],
+            [0, 'No transfer'],
+            [1, 'Transfer 50 points']],
         widget=widgets.RadioSelect
     )
 

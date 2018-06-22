@@ -106,6 +106,7 @@ class Consent(Page):
         return True
 
     def before_next_page(self):
+        self.participant.vars['start.time'] = time.time()
         self.participant.vars['game_number'] += 1
         if self.timeout_happened:
             self.participant.vars['timeout_happened'] = True

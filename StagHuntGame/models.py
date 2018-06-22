@@ -42,6 +42,6 @@ class Player(BasePlayer):
         label="Will you contribute 30 points to the group project?",
         choices=[
             [1, 'Contribute 30 points'],
-            [2, 'Do not contribute 30 points']],
+            [0, 'Do not contribute 30 points']],
         widget=widgets.RadioSelect
     )
