@@ -69,12 +69,15 @@ class Subsession(BaseSubsession):
             self.calculate_3pp_payoffs,
             self.calculate_2pp_payoffs,
         ]
+        shuffle_list = []
         for f in functions:
             self.group_randomly()
-            print(f)
             matrix = self.get_group_matrix()
-            print(matrix)
+            shuffle_list.append(f)
+            shuffle_list.append(matrix)
             f()
+        p = self.get_players()[0]
+        p.shuffle_list = shuffle_list
         for p in self.get_players():
             #
             # Set payoffs back to zero for simulated players and timeouts
@@ -324,6 +327,7 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
+    shuffle_list = models.LongStringField()
     dg_payoff = models.CurrencyField()
     ug_payoff = models.CurrencyField()
     tg_payoff = models.CurrencyField()

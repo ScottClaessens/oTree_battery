@@ -30,7 +30,7 @@ class Group(BaseGroup):
 class Player(BasePlayer):
     comprehension = models.IntegerField(
         label="If you transfer 30 points to the group project, but the other person does not, how many points will "
-              "you have at the end of Phase 1?",
+              "you have at the end of the transfer phase?",
         choices=[
             [1, '130 points (100 start + 30)'],
             [2, '100 points (100 start + 0)'],

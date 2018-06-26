@@ -30,7 +30,7 @@ class Group(BaseGroup):
 class Player(BasePlayer):
     comprehension = models.IntegerField(
         label="If you contribute 30 points to the group project, but no one else does, how many points do you end "
-              "this game with?",
+              "this task with?",
         choices=[
             [1, '130 points (100 start + 30)'],
             [2, '100 points (100 start + 0)'],
