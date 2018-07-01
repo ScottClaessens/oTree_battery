@@ -39,7 +39,7 @@ def build_participant_to_player_lookups(participant, subsession_app_names):
         views_modules = {}
         for app_name in subsession_app_names:
             views_modules[app_name] = (
-                otree.common_internal.get_views_module(app_name))
+                otree.common_internal.get_pages_module(app_name))
 
         def views_module_for_player(player):
             return views_modules[player._meta.app_config.name]
