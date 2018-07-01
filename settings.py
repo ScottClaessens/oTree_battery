@@ -84,7 +84,6 @@ ROOMS = [
         'name': 'testing',
         'display_name': 'Room for Testing',
         'participant_label_file': 'participant_label_file.txt',
-        'use_secure_urls': True,
     }
 ]
 
