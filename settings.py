@@ -141,7 +141,7 @@ SESSION_CONFIGS = [
                          'SecondPPGame',
                          'Payoffs'],
         'use_browser_bots': False,
-        'randomisation': True,
+        'randomisation': False,
         'timer': 60
     }
 ]
