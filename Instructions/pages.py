@@ -14,6 +14,7 @@ from otree.common_internal import (
 import otree.common_internal
 from django.core.urlresolvers import reverse
 import time
+import re
 
 
 def get_new_sequence_of_apps(app_sequence):
@@ -66,12 +67,20 @@ def build_participant_to_player_lookups(participant, subsession_app_names):
         ParticipantToPlayerLookup.objects.bulk_create(records_to_create)
 
 
-def vars_for_all_templates(self):
-    return {'simulated': self.participant.vars['simulated']}
+class ReEnterLabel(Page):
+    form_model = 'player'
+    form_fields = ['reenterlabel']
+
+    def reenterlabel_error_message(self, value):
+        if value is not None:
+            pattern = re.compile("^[A-Z]{3}[0-9]{2}$")
+            if pattern.match(value) is None:
+                return "That doesn't look right. Your participant label should be in the format AAA11. " \
+                       "Please try again."
 
 
 class Consent(Page):
-    timer_text = 'Time left to complete the study:'
+    timer_text = 'Time remaining in session:'
 
     def get_timeout_seconds(self):
         return self.participant.vars['expiry'] - time.time()
@@ -96,10 +105,7 @@ class Consent(Page):
         #
         # Set simulated participants
         #
-        if self.participant.label in ("sim_01", "sim_02", "sim_03", "sim_04",
-                                   "sim_05", "sim_06", "sim_07", "sim_08",
-                                   "sim_09", "sim_10", "sim_11", "sim_12",
-                                   "sim_13", "sim_14", "sim_15", "sim_16"):
+        if 'sim' in self.participant.label:
             self.participant.vars['simulated'] = True
         else:
             self.participant.vars['simulated'] = False
@@ -112,9 +118,12 @@ class Consent(Page):
             self.participant.vars['timeout_happened'] = True
             self.participant.vars['timeout_game_number'] = self.participant.vars['game_number']
 
+    def vars_for_template(self):
+        return {'simulated': self.participant.vars['simulated']}
+
 
 class Instructions(Page):
-    timer_text = 'Time left to complete the study:'
+    timer_text = 'Time remaining in session:'
 
     def get_timeout_seconds(self):
         return self.participant.vars['expiry'] - time.time()
@@ -130,8 +139,12 @@ class Instructions(Page):
             self.participant.vars['timeout_happened'] = True
             self.participant.vars['timeout_game_number'] = self.participant.vars['game_number']
 
+    def vars_for_template(self):
+        return {'simulated': self.participant.vars['simulated']}
+
 
 page_sequence = [
+    ReEnterLabel,
     Consent,
     Instructions,
 ]

@@ -3,6 +3,8 @@ from otree.api import (
     Currency as c, currency_range
 )
 from django.db import models as djmodels
+import random
+import numpy as np
 
 author = 'Scott Claessens'
 
@@ -13,7 +15,7 @@ Payoffs, Matching and Payment
 
 class Constants(BaseConstants):
     name_in_url = 'Payoffs'
-    players_per_group = 4
+    players_per_group = None
     num_rounds = 1
 
     fields_with_encryption = [
@@ -69,6 +71,12 @@ class Subsession(BaseSubsession):
             self.calculate_3pp_payoffs,
             self.calculate_2pp_payoffs,
         ]
+        # initial groups of 4
+        m = self.get_group_matrix()
+        random.shuffle(m[0])
+        m = [m[0][x:x+4] for x in range(0, len(m[0]), 4)]
+        self.set_group_matrix(m)
+        # shuffling
         shuffle_list = []
         for f in functions:
             self.group_randomly()
@@ -388,7 +396,7 @@ class Player(BasePlayer):
     simulated = models.BooleanField()
 
     def payoff_vars(self):
-        return {'sequence_of_apps': self.participant.vars['sequence_of_apps'][1:8],
+        return {'sequence_of_apps': self.participant.vars['sequence_of_apps'][1:9],
                 # Dictator Game
                 'matching_dg_role': self.participant.vars['matching_dg_role'],
                 'matching_dg_transfer_to_me': self.participant.vars['matching_dg_transfer_to_me'],
@@ -451,5 +459,6 @@ class Player(BasePlayer):
                 'overall_payoff': self.dg_payoff + self.pgg_payoff + self.secondpp_payoff + \
                                   self.staghunt_payoff + self.tg_payoff + self.thirdpp_payoff + \
                                   self.ug_payoff + self.sh_payoff,
-                'overall_bonus_cash': self.participant.payoff.to_real_world_currency(self.session)
+                'overall_bonus_cash': self.participant.payoff.to_real_world_currency(self.session),
+                'payoff_plus_participation_fee': self.participant.payoff_plus_participation_fee()
                 }

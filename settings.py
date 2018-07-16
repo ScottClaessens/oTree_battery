@@ -69,7 +69,14 @@ USE_POINTS = True
 # LANGUAGE_CODE = 'de'
 
 # if an app is included in SESSION_CONFIGS, you don't need to list it here
-INSTALLED_APPS = ['otree']
+INSTALLED_APPS = [
+    'otree',
+    'otree_mturk_utils',
+]
+
+EXTENSION_APPS  = [
+    'otree_mturk_utils',
+]
 
 SENTRY_DSN = 'http://d606c64efb5d449d9ac450ef47fef1b0:1f312687dcc6423fa67a65d3b78782dc@sentry.otree.org/143'
 
@@ -118,7 +125,7 @@ mturk_hit_settings = {
 # e.g. self.session.config['participation_fee']
 
 SESSION_CONFIG_DEFAULTS = {
-    'real_world_currency_per_point': 0.04,
+    'real_world_currency_per_point': 0.035,
     'participation_fee': 20.00,
     'doc': "",
     'mturk_hit_settings': mturk_hit_settings,
@@ -141,7 +148,7 @@ SESSION_CONFIGS = [
                          'Payoffs'],
         'use_browser_bots': False,
         'randomisation': False,
-        'timer': 60
+        'timer': 50
     }
 ]
 

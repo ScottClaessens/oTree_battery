@@ -5,20 +5,17 @@ from Cryptodome.Cipher import PKCS1_OAEP
 from Payoffs.management.commands.crypto_pps import get_public_key
 import re
 import time
+from otree_mturk_utils.pages import CustomMturkPage, CustomMturkWaitPage
 
 public_key = get_public_key()
 cipher = PKCS1_OAEP.new(public_key)
 
 
-class CalculateWaitPage(WaitPage):
+class CalculateWaitPage(CustomMturkWaitPage):
     wait_for_all_groups = True
-    title_text = "Matching you to other participants... Please wait..."
-    body_text = "Thank you for completing all the tasks. We will now randomly match you with other participants. " \
-                "Since some participants are slower than others, please be patient while we wait for them to finish " \
-                "too. We apologise if this takes some time. However, if anyone takes longer than the allotted hour, " \
-                "we will skip them forward to this screen, so you shouldn't have to wait too long. NOTE: YOU MAY " \
-                "LEAVE THIS SCREEN OPEN AND COME BACK TO IT LATER - AFTER THIS SCREEN, YOU CAN FINISH THE REST OF THE " \
-                "STUDY AT YOUR OWN PACE."
+    group_by_arrival_time = False
+    use_task = False
+    # task = 'survey'
 
     def after_all_players_arrive(self):
         self.subsession.dropouts_and_simulated()
@@ -84,17 +81,22 @@ class BankAgain(Page):
             setattr(self.player, '{}_cleartext'.format(f), None)
 
 
-class Recruitment(Page):
-    form_model = 'player'
-    form_fields = ['recruitment']
-
+class BankWrong(Page):
     def is_displayed(self):
-        return not self.player.simulated
+        return not self.player.simulated and self.player.correct_details == 0
 
 
 class Feedback(Page):
     form_model = 'player'
     form_fields = ['feedback']
+
+    def is_displayed(self):
+        return not self.player.simulated
+
+
+class Recruitment(Page):
+    form_model = 'player'
+    form_fields = ['recruitment']
 
     def is_displayed(self):
         return not self.player.simulated
@@ -143,8 +145,9 @@ page_sequence = [
     TimeoutHappened,
     Payment,
     BankAgain,
-    Recruitment,
+    BankWrong,
     Feedback,
+    Recruitment,
     ReEnterLabel,
     ReEnterLabel2,
     Final

@@ -13,7 +13,7 @@ General Instructions & Randomising App Sequence
 
 class Constants(BaseConstants):
     name_in_url = 'instructions'
-    players_per_group = None
+    players_per_group = 4
     num_rounds = 1
 
 
@@ -89,3 +89,5 @@ class Group(BaseGroup):
 
 class Player(BasePlayer):
     sequence_of_apps = models.LongStringField()
+    reenterlabel = models.StringField(label='Please re-enter your participant label below. '
+                                            'This can be found in your original email.')

@@ -8,7 +8,7 @@ def vars_for_all_templates(self):
 
 
 class BasePage(Page):
-    timer_text = 'Time left to complete the study:'
+    timer_text = 'Time remaining in session:'
 
     def get_timeout_seconds(self):
         return self.participant.vars['expiry'] - time.time()

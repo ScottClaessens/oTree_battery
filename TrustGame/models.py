@@ -44,7 +44,7 @@ class Player(BasePlayer):
     )
 
     tg2 = models.CurrencyField(
-        label="If you are Person B and Person A transfers you 50 points (which is multiplied to 150), "
+        label="If you are Person B and Person A transfers you 50 points (which is tripled to 150), "
               "how many points do you want to transfer back to A? [0 - 150]",
         min=0,
         max=150,
