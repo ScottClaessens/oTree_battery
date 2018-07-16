@@ -1,0 +1,17 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree %}
+
+{% block title %}
+    Begin the tasks
+{% endblock %}
+
+{% block content %}
+<p>
+    <b>You will now begin the tasks.</b> The decisions you make from now on will determine how much you are reimbursed
+    from this study.
+</p>
+<p>
+    Please click Next to continue to the first task.
+</p>
+{% next_button %}
+{% endblock %}

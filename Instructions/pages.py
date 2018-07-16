@@ -78,13 +78,6 @@ class ReEnterLabel(Page):
                 return "That doesn't look right. Your participant label should be in the format AAA11. " \
                        "Please try again."
 
-
-class Consent(Page):
-    timer_text = 'Time remaining in session:'
-
-    def get_timeout_seconds(self):
-        return self.participant.vars['expiry'] - time.time()
-
     def is_displayed(self):
         #
         # Randomisation
@@ -105,11 +98,24 @@ class Consent(Page):
         #
         # Set simulated participants
         #
-        if 'sim' in self.participant.label:
-            self.participant.vars['simulated'] = True
+        if self.participant.label is not None:
+            if 'sim' in self.participant.label:
+                self.participant.vars['simulated'] = True
+            else:
+                self.participant.vars['simulated'] = False
         else:
             self.participant.vars['simulated'] = False
-        return True
+        if self.participant.vars['simulated'] is False:
+            return True
+        else:
+            return False
+
+
+class Consent(Page):
+    timer_text = 'Time remaining in session:'
+
+    def get_timeout_seconds(self):
+        return self.participant.vars['expiry'] - time.time()
 
     def before_next_page(self):
         self.participant.vars['start.time'] = time.time()
@@ -139,12 +145,28 @@ class Instructions(Page):
             self.participant.vars['timeout_happened'] = True
             self.participant.vars['timeout_game_number'] = self.participant.vars['game_number']
 
-    def vars_for_template(self):
-        return {'simulated': self.participant.vars['simulated']}
+
+class BeginTasks(Page):
+    timer_text = 'Time remaining in session:'
+
+    def get_timeout_seconds(self):
+        return self.participant.vars['expiry'] - time.time()
+
+    def is_displayed(self):
+        return self.participant.vars['expiry'] \
+               - time.time() > 3 and not self.participant.vars[
+            'timeout_happened'] and not self.participant.vars[
+            'simulated']
+
+    def before_next_page(self):
+        if self.timeout_happened:
+            self.participant.vars['timeout_happened'] = True
+            self.participant.vars['timeout_game_number'] = self.participant.vars['game_number']
 
 
 page_sequence = [
     ReEnterLabel,
     Consent,
     Instructions,
+    BeginTasks
 ]
