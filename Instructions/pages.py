@@ -71,6 +71,18 @@ class ReEnterLabel(Page):
     form_model = 'player'
     form_fields = ['reenterlabel']
 
+    timer_text = 'Time remaining in session:'
+
+    def get_timeout_seconds(self):
+        return self.participant.vars['expiry'] - time.time()
+
+    def before_next_page(self):
+        self.participant.vars['start.time'] = time.time()
+        self.participant.vars['game_number'] += 1
+        if self.timeout_happened:
+            self.participant.vars['timeout_happened'] = True
+            self.participant.vars['timeout_game_number'] = self.participant.vars['game_number']
+
     def reenterlabel_error_message(self, value):
         if value is not None:
             pattern = re.compile("^[A-Z]{3}[0-9]{2}$")
@@ -117,9 +129,13 @@ class Consent(Page):
     def get_timeout_seconds(self):
         return self.participant.vars['expiry'] - time.time()
 
+    def is_displayed(self):
+        return self.participant.vars['expiry'] \
+               - time.time() > 3 and not self.participant.vars[
+            'timeout_happened'] and not self.participant.vars[
+            'simulated']
+
     def before_next_page(self):
-        self.participant.vars['start.time'] = time.time()
-        self.participant.vars['game_number'] += 1
         if self.timeout_happened:
             self.participant.vars['timeout_happened'] = True
             self.participant.vars['timeout_game_number'] = self.participant.vars['game_number']
