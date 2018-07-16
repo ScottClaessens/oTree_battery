@@ -140,9 +140,6 @@ class Consent(Page):
             self.participant.vars['timeout_happened'] = True
             self.participant.vars['timeout_game_number'] = self.participant.vars['game_number']
 
-    def vars_for_template(self):
-        return {'simulated': self.participant.vars['simulated']}
-
 
 class Instructions(Page):
     timer_text = 'Time remaining in session:'
