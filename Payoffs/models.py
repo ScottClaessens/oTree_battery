@@ -4,7 +4,6 @@ from otree.api import (
 )
 from django.db import models as djmodels
 import random
-import numpy as np
 
 author = 'Scott Claessens'
 
