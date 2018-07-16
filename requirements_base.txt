@@ -1,2 +1,3 @@
 otree>=2.0.34
 pycryptodomex==3.6.1
+django-radiogrid==1.0.4
