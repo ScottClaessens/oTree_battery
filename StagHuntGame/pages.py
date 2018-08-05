@@ -48,6 +48,8 @@ class shDecision(BasePage):
     def before_next_page(self):
         self.participant.vars['game_number'] += 1
         self.participant.vars['sh'] = self.player.sh
+        if self.participant.vars['game_number'] == 9:
+            self.participant.vars['game_only_time_spent'] = time.time() - self.participant.vars['start.time']
 
 
 page_sequence = [

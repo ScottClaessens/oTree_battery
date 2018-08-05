@@ -390,7 +390,8 @@ class Player(BasePlayer):
                                              'responses here with your previous NZAVS responses.')
 
     total_payment = models.FloatField()
-    time_spent = models.IntegerField()
+    overall_time_spent = models.IntegerField()
+    game_only_time_spent = models.IntegerField()
     timeout_happened = models.BooleanField()
     simulated = models.BooleanField()
 

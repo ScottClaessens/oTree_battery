@@ -54,6 +54,8 @@ class ug2(BasePage):
         self.participant.vars['game_number'] += 1
         self.participant.vars['ug1'] = self.player.ug1
         self.participant.vars['ug2'] = self.player.ug2
+        if self.participant.vars['game_number'] == 9:
+            self.participant.vars['game_only_time_spent'] = time.time() - self.participant.vars['start.time']
 
 
 page_sequence = [

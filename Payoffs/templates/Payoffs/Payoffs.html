@@ -44,12 +44,12 @@
     <p>You offered Person B {{ug1}}.
     {% if matching_ug_reject %}However, Person B's minimum acceptable offer was {{matching_ug_mao}}, and so they
     rejected your offer.
-    {% else %}Person B's minimum acceptable offer of {{matching_ug_mao}} was below this, and so they accepted
+    {% else %}Person B's minimum acceptable offer of {{matching_ug_mao}} was below or equal to this, and so they accepted
     your offer.{% endif %}</p>
 {% else %}
     <p>Person A offered you {{matching_ug_offer}}.
     {% if matching_ug_reject %}However, your minimum acceptable offer was {{ug2}}, and so you rejected their offer.
-    {% else %}Your minimum acceptable offer of {{ug2}} was below this, and so you accepted their offer.{% endif %}</p>
+    {% else %}Your minimum acceptable offer of {{ug2}} was below or equal to this, and so you accepted their offer.{% endif %}</p>
 {% endif %}
 <p>Your payoff for this task was <b>{{matching_ug_payoff}}</b>.</p>
 

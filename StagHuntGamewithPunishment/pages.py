@@ -55,6 +55,8 @@ class staghuntpun2(BasePage):
         self.participant.vars['staghunt1'] = self.player.staghunt1
         self.participant.vars['staghunt2'] = self.player.staghunt2
         self.participant.vars['staghunt3'] = self.player.staghunt3
+        if self.participant.vars['game_number'] == 9:
+            self.participant.vars['game_only_time_spent'] = time.time() - self.participant.vars['start.time']
 
 
 page_sequence = [

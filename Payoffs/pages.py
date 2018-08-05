@@ -117,7 +117,8 @@ class ReEnterLabel(Page):
                        "Please try again."
 
     def before_next_page(self):
-        self.player.time_spent = time.time() - self.participant.vars['start.time']
+        self.player.game_only_time_spent = self.participant.vars['game_only_time_spent']
+        self.player.overall_time_spent = time.time() - self.participant.vars['start.time']
 
 
 class ReEnterLabel2(Page):

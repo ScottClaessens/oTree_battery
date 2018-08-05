@@ -55,6 +55,8 @@ class secondpp2(BasePage):
         self.participant.vars['secondpp1'] = self.player.secondpp1
         self.participant.vars['secondpp2'] = self.player.secondpp2
         self.participant.vars['secondpp3'] = self.player.secondpp3
+        if self.participant.vars['game_number'] == 9:
+            self.participant.vars['game_only_time_spent'] = time.time() - self.participant.vars['start.time']
 
 
 page_sequence = [
