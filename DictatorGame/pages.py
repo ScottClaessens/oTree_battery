@@ -41,6 +41,11 @@ class dgComp(BasePage):
     form_fields = ['comprehension']
 
 
+class dgComp2(BasePage):
+    def vars_for_template(self):
+        return {'comp': self.player.comprehension}
+
+
 class dgDecision(BasePage):
     form_model = 'player'
     form_fields = ['dg']
@@ -55,5 +60,6 @@ class dgDecision(BasePage):
 page_sequence = [
     dgIntro,
     dgComp,
+    dgComp2,
     dgDecision
 ]

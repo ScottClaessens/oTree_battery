@@ -1,0 +1,25 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree %}
+
+{% block title %}
+    Task {{game_number}} of 8
+{% endblock %}
+
+{% block content %}
+
+{% if comp == 1 %}
+<p class="greentext">Correct! If Person A transfers 20 points, Person B gets 20 points
+    and Person A keeps 80 points to themselves.</p>
+{% else %}
+<p class="redtext">Incorrect! If Person A transfers 20 points, Person B gets 20 points
+    and Person A keeps 80 points to themselves.</p>
+{% endif %}
+
+<p>
+    Click Next to make your real decision.
+</p>
+
+{% include Constants.dgInstructions %}
+
+{% next_button %}
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree %}
+
+{% block title %}
+    Task {{game_number}} of 8
+{% endblock %}
+
+{% block content %}
+
+{% if comp == 3 %}
+<p class="greentext">Correct! Contributing all 100 of your points maximises the payoffs to the group, but
+    contributing 0 points maximises the payoffs for yourself.</p>
+{% else %}
+<p class="redtext">Incorrect! Contributing all 100 of your points maximises the payoffs to the group, but
+    contributing 0 points maximises the payoffs for yourself.</p>
+{% endif %}
+
+<p>
+    Click Next to make your real decision.
+</p>
+
+{% include Constants.pggInstructions %}
+
+{% next_button %}
+{% endblock %}

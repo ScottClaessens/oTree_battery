@@ -41,6 +41,11 @@ class shComp(BasePage):
     form_fields = ['comprehension']
 
 
+class shComp2(BasePage):
+    def vars_for_template(self):
+        return {'comp': self.player.comprehension}
+
+
 class shDecision(BasePage):
     form_model = 'player'
     form_fields = ['sh']
@@ -55,5 +60,6 @@ class shDecision(BasePage):
 page_sequence = [
     shIntro,
     shComp,
+    shComp2,
     shDecision
 ]

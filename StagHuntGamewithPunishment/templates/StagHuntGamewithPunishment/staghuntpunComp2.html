@@ -1,0 +1,27 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree %}
+
+{% block title %}
+    Task {{game_number}} of 8
+{% endblock %}
+
+{% block content %}
+
+{% if comp == 3 %}
+<p class="greentext">Correct! If you are the only person to contribute to the group project, it is unsuccessful,
+    and so all the points in it are lost. So you end the task with 70 points (the 100 points you started with,
+    minus the 30 points you contributed to the group project).</p>
+{% else %}
+<p class="redtext">Incorrect! If you are the only person to contribute to the group project, it is unsuccessful,
+    and so all the points in it are lost. So you end the task with 70 points (the 100 points you started with,
+    minus the 30 points you contributed to the group project).</p>
+{% endif %}
+
+<p>
+    Click Next to make your real decision.
+</p>
+
+{% include Constants.staghuntInstructions %}
+
+{% next_button %}
+{% endblock %}

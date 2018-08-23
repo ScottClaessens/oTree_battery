@@ -1,0 +1,27 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree %}
+
+{% block title %}
+    Task {{game_number}} of 8
+{% endblock %}
+
+{% block content %}
+
+{% if comp == 1 %}
+<p class="greentext">Correct! If Person A transfers 50 points, those 50 points are tripled and given to Person B
+    (so Person B now has 200 points). If Person B transfers back 25 points, they end the task with 175 points.
+    Person A ends the task with the 25 points that Person B transferred.</p>
+{% else %}
+<p class="redtext">Incorrect! If Person A transfers 50 points, those 50 points are tripled and given to Person B
+    (so Person B now has 200 points). If Person B transfers back 25 points, they end the task with 175 points.
+    Person A ends the task with the 25 points that Person B transferred.</p>
+{% endif %}
+
+<p>
+    Click Next to make your real decisions.
+</p>
+
+{% include Constants.tgInstructions %}
+
+{% next_button %}
+{% endblock %}

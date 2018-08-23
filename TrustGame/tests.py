@@ -11,6 +11,7 @@ class PlayerBot(Bot):
             yield (pages.tgComp, {'comprehension': 1})
         else:
             yield (pages.tgComp, {'comprehension': 2})
+        yield (pages.tgComp2)
         yield (pages.tg1, {'tg1': random.randint(0, 1)})
         yield (pages.tg2, {'tg2': c(random.randint(1, 150))})
 

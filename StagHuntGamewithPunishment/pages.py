@@ -41,6 +41,11 @@ class staghuntpunComp(BasePage):
     form_fields = ['comprehension']
 
 
+class staghuntpunComp2(BasePage):
+    def vars_for_template(self):
+        return {'comp': self.player.comprehension}
+
+
 class staghuntpun1(BasePage):
     form_model = 'player'
     form_fields = ['staghunt1']
@@ -62,6 +67,7 @@ class staghuntpun2(BasePage):
 page_sequence = [
     staghuntpunIntro,
     staghuntpunComp,
+    staghuntpunComp2,
     staghuntpun1,
     staghuntpun2
 ]

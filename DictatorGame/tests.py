@@ -12,4 +12,5 @@ class PlayerBot(Bot):
             yield (pages.dgComp, {'comprehension': 1})
         else:
             yield (pages.dgComp, {'comprehension': 2})
+        yield (pages.dgComp2)
         yield (pages.dgDecision, {'dg': c(random.randint(1,100))})

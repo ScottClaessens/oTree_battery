@@ -1,0 +1,29 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree %}
+
+{% block title %}
+    Task {{game_number}} of 8
+{% endblock %}
+
+{% block content %}
+
+{% if comp == 2 %}
+<p class="greentext">Correct! If Person B transfers and Person A doesn't, Person A ends the transfer phase
+    with 160 points (the 100 points they started with, plus the 60 they received from Person B) and Person B
+    ends the transfer phase with 70 points (the 100 points they started with, minus the 30 points they
+    transferred to Person A).</p>
+{% else %}
+<p class="redtext">Incorrect! If Person B transfers and Person A doesn't, Person A ends the transfer phase
+    with 160 points (the 100 points they started with, plus the 60 they received from Person B) and Person B
+    ends the transfer phase with 70 points (the 100 points they started with, minus the 30 points they
+    transferred to Person A).</p>
+{% endif %}
+
+<p>
+    Click Next to make your real decisions.
+</p>
+
+{% include Constants.secondppInstructions %}
+
+{% next_button %}
+{% endblock %}

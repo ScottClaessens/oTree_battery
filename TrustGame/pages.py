@@ -34,6 +34,11 @@ class tgComp(BasePage):
     form_fields = ['comprehension']
 
 
+class tgComp2(BasePage):
+    def vars_for_template(self):
+        return {'comp': self.player.comprehension}
+
+
 class tg1(BasePage):
     form_model = 'player'
     form_fields = ['tg1']
@@ -54,6 +59,7 @@ class tg2(BasePage):
 page_sequence = [
     tgIntro,
     tgComp,
+    tgComp2,
     tg1,
     tg2
 ]

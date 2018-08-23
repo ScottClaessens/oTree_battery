@@ -12,4 +12,5 @@ class PlayerBot(Bot):
             yield (pages.shComp, {'comprehension': 3})
         else:
             yield (pages.shComp, {'comprehension': 1})
+        yield (pages.shComp2)
         yield (pages.shDecision, {'sh': c(random.randint(0, 1))})

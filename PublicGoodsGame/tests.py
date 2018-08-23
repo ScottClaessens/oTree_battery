@@ -12,4 +12,5 @@ class PlayerBot(Bot):
             yield (pages.pggComp, {'comprehension': 3})
         else:
             yield (pages.pggComp, {'comprehension': 1})
+        yield (pages.pggComp2)
         yield (pages.pggDecision, {'pgg': c(random.randint(1,100))})

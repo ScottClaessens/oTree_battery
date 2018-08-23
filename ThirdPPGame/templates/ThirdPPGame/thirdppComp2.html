@@ -1,0 +1,25 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree %}
+
+{% block title %}
+    Task {{game_number}} of 8
+{% endblock %}
+
+{% block content %}
+
+{% if comp == 1 %}
+<p class="greentext">Correct! Person C can only remove points from Person A if they decide to take points from
+    Person B.</p>
+{% else %}
+<p class="redtext">Incorrect! Person C can only remove points from Person A if they decide to take points from
+    Person B.</p>
+{% endif %}
+
+<p>
+    Click Next to make your real decisions.
+</p>
+
+{% include Constants.thirdppInstructions %}
+
+{% next_button %}
+{% endblock %}

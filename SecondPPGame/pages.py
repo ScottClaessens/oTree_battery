@@ -41,6 +41,11 @@ class secondppComp(BasePage):
     form_fields = ['comprehension']
 
 
+class secondppComp2(BasePage):
+    def vars_for_template(self):
+        return {'comp': self.player.comprehension}
+
+
 class secondpp1(BasePage):
     form_model = 'player'
     form_fields = ['secondpp1']
@@ -62,6 +67,7 @@ class secondpp2(BasePage):
 page_sequence = [
     secondppIntro,
     secondppComp,
+    secondppComp2,
     secondpp1,
     secondpp2
 ]

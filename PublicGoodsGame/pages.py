@@ -41,6 +41,11 @@ class pggComp(BasePage):
     form_fields = ['comprehension']
 
 
+class pggComp2(BasePage):
+    def vars_for_template(self):
+        return {'comp': self.player.comprehension}
+
+
 class pggDecision(BasePage):
     form_model = 'player'
     form_fields = ['pgg']
@@ -55,5 +60,6 @@ class pggDecision(BasePage):
 page_sequence = [
     pggIntro,
     pggComp,
+    pggComp2,
     pggDecision
 ]
