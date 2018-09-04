@@ -88,7 +88,7 @@ class BankWrong(Page):
 
 class Feedback(Page):
     form_model = 'player'
-    form_fields = ['feedback']
+    form_fields = ['feedback', 'understand']
 
     def is_displayed(self):
         return not self.player.simulated

@@ -21,7 +21,8 @@ class PlayerBot(Bot):
         yield (pages.BankAgain, {'correct_details': correct})
         if correct == 0:
             yield (pages.BankWrong)
-        yield (pages.Feedback, {'feedback': "No feedback"})
+        yield (pages.Feedback, {'feedback': "No feedback",
+                                'understand': random.randint(1, 7)})
         yield (pages.Recruitment, {'recruitment': 1})
         yield SubmissionMustFail(pages.ReEnterLabel, {'reenterlabel': '0'})
         yield (pages.ReEnterLabel, {'reenterlabel': 'AAA11'})

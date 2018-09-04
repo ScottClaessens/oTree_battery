@@ -376,6 +376,20 @@ class Player(BasePlayer):
         widget=widgets.RadioSelect
     )
 
+    understand = models.IntegerField(
+        label="How clear were the instructions for the tasks?",
+        choices=[
+            [7, 'Extremely clear'],
+            [6, 'Moderately clear'],
+            [5, 'Slightly clear'],
+            [4, 'Neither clear or unclear'],
+            [3, 'Slightly unclear'],
+            [2, 'Moderately unclear'],
+            [1, 'Extremely unclear']
+        ],
+        widget=widgets.RadioSelect
+    )
+
     feedback = models.LongStringField(
         blank=True,
         label="If you would like to leave us any feedback about this study, please do so below"
