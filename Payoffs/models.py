@@ -84,7 +84,7 @@ class Subsession(BaseSubsession):
             shuffle_list.append(matrix)
             f()
         p = self.get_players()[0]
-        p.shuffle_list = shuffle_list
+        p.shuffle_list = str(shuffle_list)
         for p in self.get_players():
             #
             # Set payoffs back to zero for simulated players and timeouts
@@ -403,11 +403,11 @@ class Player(BasePlayer):
                                              'the correct participant label, as we will use this to match your '
                                              'responses here with your previous NZAVS responses.')
 
-    total_payment = models.FloatField()
+    total_payment = models.CurrencyField()
     overall_time_spent = models.IntegerField()
     game_only_time_spent = models.IntegerField()
-    timeout_happened = models.BooleanField()
-    simulated = models.BooleanField()
+    timeout_happened = models.BooleanField(initial=False)
+    simulated = models.BooleanField(initial=False)
 
     def payoff_vars(self):
         return {'sequence_of_apps': self.participant.vars['sequence_of_apps'][1:9],

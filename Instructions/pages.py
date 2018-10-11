@@ -101,12 +101,11 @@ class ReEnterLabel(Page):
                 ParticipantToPlayerLookup.objects.filter(participant=self.participant).delete()
                 sequence_of_apps = get_new_sequence_of_apps(self.session.config['app_sequence'])
                 self.participant.vars['sequence_of_apps'] = sequence_of_apps
-                self.player.sequence_of_apps = sequence_of_apps
-                build_participant_to_player_lookups(self.participant, self.player.sequence_of_apps)
+                self.player.sequence_of_apps = str(sequence_of_apps)
+                build_participant_to_player_lookups(self.participant, sequence_of_apps)
         else:
             self.participant.vars['sequence_of_apps'] = self.session.config['app_sequence']
-            self.player.sequence_of_apps = self.session.config['app_sequence']
-            print(self.player.sequence_of_apps)
+            self.player.sequence_of_apps = str(self.session.config['app_sequence'])
         #
         # Set simulated participants
         #

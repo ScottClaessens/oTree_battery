@@ -8,10 +8,10 @@
 {% block content %}
 
 {% if comp == 3 %}
-<p class="greentext">Correct! Contributing all 100 of your points maximises the payoffs to the group, but
+<p class="greentext"><b>Correct!</b> Contributing all 100 of your points maximises the payoffs to the group, but
     contributing 0 points maximises the payoffs for yourself.</p>
 {% else %}
-<p class="redtext">Incorrect! Contributing all 100 of your points maximises the payoffs to the group, but
+<p class="redtext"><b>Incorrect!</b> Contributing all 100 of your points maximises the payoffs to the group, but
     contributing 0 points maximises the payoffs for yourself.</p>
 {% endif %}
 
@@ -19,7 +19,8 @@
     Click Next to make your real decision.
 </p>
 
+{% next_button %}
+
 {% include Constants.pggInstructions %}
 
-{% next_button %}
 {% endblock %}

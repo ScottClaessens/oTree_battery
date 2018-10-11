@@ -8,12 +8,12 @@
 {% block content %}
 
 {% if comp == 1 %}
-<p class="greentext">Correct! If Person B accepts an offer of 20 points, Person A ends the task with 80 points
-    and Person B ends the task with the 20 points they accepted. However, if Person B rejects an offer of 20 point,
+<p class="greentext"><b>Correct!</b> If Person B accepts an offer of 20 points, Person A ends the task with 80 points
+    and Person B ends the task with the 20 points they accepted. However, if Person B rejects an offer of 20 points,
     both Person A and Person B end the task with 0 points.</p>
 {% else %}
-<p class="redtext">Incorrect! If Person B accepts an offer of 20 points, Person A ends the task with 80 points
-    and Person B ends the task with the 20 points they accepted. However, if Person B rejects an offer of 20 point,
+<p class="redtext"><b>Incorrect!</b> If Person B accepts an offer of 20 points, Person A ends the task with 80 points
+    and Person B ends the task with the 20 points they accepted. However, if Person B rejects an offer of 20 points,
     both Person A and Person B end the task with 0 points.</p>
 {% endif %}
 
@@ -21,7 +21,8 @@
     Click Next to make your real decisions.
 </p>
 
+{% next_button %}
+
 {% include Constants.ugInstructions %}
 
-{% next_button %}
 {% endblock %}

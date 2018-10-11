@@ -1,6 +1,11 @@
 {% extends "otree/Page.html" %}
 {% load otree %}
 
+{% block body_main %}
+<img src="{% static "global/NZAVSheader.png" %}"/>
+ {{block.super}}
+{% endblock %}
+
 {% block title %}Welcome{% endblock %}
 
 {% block styles %}
@@ -11,26 +16,14 @@
 	background:#F5F5DC; /* biege color */
 	margin:20px auto;
     padding: 10px 10px 10px 10px;
-}
-</style>
-<style>
-    .otree-timer {
-        display: none;
+    }
+    img {
+        width: 100%;
+        max-width: 500px;
     }
 </style>
 {% endblock %}
 
-{% block scripts %}
-<script>
-    $(function () {
-        $('.otree-timer__time-left').on('update.countdown', function (event) {
-            if (event.offset.totalSeconds <= 600) {
-                $('.otree-timer').show();
-            }
-        });
-    });
-</script>
-{% endblock %}
 
 {% block content %}
 
@@ -68,7 +61,7 @@
     <p>
         The purpose of this project is to assess how people interact and make economic decisions in groups. You have
         been invited to participate in this study because you are a participant in the New Zealand Attitudes and
-        Values Survey, and you have agreed to participate in an additional online study. You must be at least 18 years
+        Values Study, and you have agreed to participate in an additional online study. You must be at least 18 years
         old to participate. Participation in this study is voluntary.
     </p>
     <p>

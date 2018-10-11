@@ -54,7 +54,7 @@ class pggDecision(BasePage):
         self.participant.vars['game_number'] += 1
         self.participant.vars['pgg'] = self.player.pgg
         if self.participant.vars['game_number'] == 9:
-            self.participant.vars['game_only_time_spent'] = time.time() - self.participant.vars['start.time']
+            self.participant.vars['game_only_time_spent'] = int(time.time() - self.participant.vars['start.time'])
 
 
 page_sequence = [

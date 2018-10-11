@@ -68,7 +68,7 @@ class CustomMturkWaitPage(WaitPage):
     group_by_arrival_time = True
 
     def vars_for_template(self):
-        return {'num_players': len(self.subsession.get_players())}
+        return {'num_players': self.session.num_participants}
 
 
     def set_waiting_page_payoff(self, p):

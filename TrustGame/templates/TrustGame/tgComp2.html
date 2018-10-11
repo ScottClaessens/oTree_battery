@@ -8,11 +8,11 @@
 {% block content %}
 
 {% if comp == 1 %}
-<p class="greentext">Correct! If Person A transfers 50 points, those 50 points are tripled and given to Person B
+<p class="greentext"><b>Correct!</b> If Person A transfers 50 points, those 50 points are tripled and given to Person B
     (so Person B now has 200 points). If Person B transfers back 25 points, they end the task with 175 points.
     Person A ends the task with the 25 points that Person B transferred.</p>
 {% else %}
-<p class="redtext">Incorrect! If Person A transfers 50 points, those 50 points are tripled and given to Person B
+<p class="redtext"><b>Incorrect!</b> If Person A transfers 50 points, those 50 points are tripled and given to Person B
     (so Person B now has 200 points). If Person B transfers back 25 points, they end the task with 175 points.
     Person A ends the task with the 25 points that Person B transferred.</p>
 {% endif %}
@@ -21,7 +21,8 @@
     Click Next to make your real decisions.
 </p>
 
+{% next_button %}
+
 {% include Constants.tgInstructions %}
 
-{% next_button %}
 {% endblock %}

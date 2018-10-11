@@ -8,10 +8,10 @@
 {% block content %}
 
 {% if comp == 1 %}
-<p class="greentext">Correct! Person C can only remove points from Person A if they decide to take points from
+<p class="greentext"><b>Correct!</b> Person C can only remove points from Person A if they decide to take points from
     Person B.</p>
 {% else %}
-<p class="redtext">Incorrect! Person C can only remove points from Person A if they decide to take points from
+<p class="redtext"><b>Incorrect!</b> Person C can only remove points from Person A if they decide to take points from
     Person B.</p>
 {% endif %}
 
@@ -19,7 +19,8 @@
     Click Next to make your real decisions.
 </p>
 
+{% next_button %}
+
 {% include Constants.thirdppInstructions %}
 
-{% next_button %}
 {% endblock %}

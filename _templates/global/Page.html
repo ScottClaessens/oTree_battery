@@ -9,6 +9,11 @@
     {% extends "global/Page.html" %}
 {% endcomment %}
 
+{% block body_main %}
+<img src="{% static "global/NZAVSheader.png" %}"/>
+ {{block.super}}
+{% endblock %}
+
 {% block global_styles  %}
 <style type="text/css">
     img {
