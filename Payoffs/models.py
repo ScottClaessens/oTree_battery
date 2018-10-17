@@ -44,7 +44,7 @@ class Subsession(BaseSubsession):
                 p.participant.vars['dg'] = c(25)         # 25
                 p.participant.vars['ug1'] = c(40)        # 40
                 p.participant.vars['ug2'] = c(25)        # 25
-                p.participant.vars['tg1'] = 1            # 2
+                p.participant.vars['tg1'] = 1            # 1
                 p.participant.vars['tg2'] = c(75)        # 75
                 p.participant.vars['secondpp1'] = 1      # 1
                 p.participant.vars['secondpp2'] = c(0)   # 0

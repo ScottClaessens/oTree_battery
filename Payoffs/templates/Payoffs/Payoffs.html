@@ -76,34 +76,34 @@
 <p>In this task, both people started with {{100|c}}.</p>
 {% if secondpp1 == 1 %}
     {% if matching_2pp_pd == 1 %}
-        <p>In Phase 1, both people transferred {{30|c}} to the other. These transfers were doubled
-            to {{60|c}}. At the end of Phase 1, therefore, your payoff was {{130|c}}.</p>
+        <p>In the transfer phase, both people transferred {{30|c}} to the other. These transfers were doubled
+            to {{60|c}}. At the end of the transfer phase, therefore, your payoff was {{130|c}}.</p>
     {% elif matching_2pp_pd == 0 %}
-        <p>In Phase 1, you transferred {{30|c}} but the other person did not. At the end of Phase 1,
-            therefore, your payoff was {{70|c}}.</p>
+        <p>In the transfer phase, you transferred {{30|c}} but the other person did not. At the end of the transfer
+            phase, therefore, your payoff was {{70|c}}.</p>
     {% endif %}
 {% else %}
     {% if matching_2pp_pd == 1 %}
-        <p>In Phase 1, the other person transferred {{30|c}} to you (doubled to {{60|c}}),
-            but you did not transfer anything. At the end of Phase 1, therefore, your payoff was
+        <p>In the transfer phase, the other person transferred {{30|c}} to you (doubled to {{60|c}}),
+            but you did not transfer anything. At the end of the transfer phase, therefore, your payoff was
             {{160|c}}.</p>
     {% elif matching_2pp_pd == 0 %}
-        <p>In Phase 1, neither person transferred points to the other.</p>
+        <p>In the transfer phase, neither person transferred points to the other.</p>
     {% endif %}
 {% endif %}
 {% if matching_2pp_pd == 1 %}
     {% if secondpp2 > 0 %}
-    <p>In Phase 2, you removed {{secondpp2}} from the other person for their decision in Phase 1.
+    <p>In the penalty phase, you removed {{secondpp2}} from the other person for their decision in the transfer phase.
     This cost you {{secondpp2_cost}}.</p>
     {% else %}
-    <p>You did not remove any points from the other person for their decision in Phase 1.</p>
+    <p>You did not remove any points from the other person for their decision in the transfer phase.</p>
     {% endif %}
 {% elif matching_2pp_pd == 0 %}
     {% if secondpp3 > 0 %}
-    <p>In Phase 2, you removed {{secondpp3}} from the other person for their decision in Phase 1.
+    <p>In the penalty phase, you removed {{secondpp3}} from the other person for their decision in the transfer phase.
     This cost you {{secondpp3_cost}}.</p>
     {% else %}
-    <p>You did not remove any points from the other person for their decision in Phase 1.</p>
+    <p>You did not remove any points from the other person for their decision in the transfer phase.</p>
     {% endif %}
 {% endif %}
 {% if secondpp1 == 1 %}
@@ -180,37 +180,37 @@
 <p>In this task, both people started with {{100|c}}.</p>
 {% if staghunt1 == 1 %}
     {% if matching_staghunt_action == 1 %}
-        <p>In Phase 1, both people chose to transfer {{30|c}} to the group project. The group project was successful,
+        <p>In the transfer phase, both people chose to transfer {{30|c}} to the group project. The group project was successful,
         and so the points in the group project were doubled and distributed evenly between both people.
-        At the end of Phase 1, therefore, your payoff was {{130|c}}.</p>
+        At the end of the transfer phase, therefore, your payoff was {{130|c}}.</p>
     {% elif matching_staghunt_action == 0 %}
-        <p>In Phase 1, you chose to transfer {{30|c}} to the group project, but the other person did not. The group
+        <p>In the transfer phase, you chose to transfer {{30|c}} to the group project, but the other person did not. The group
         project was unsuccessful, and so the points in the group project were lost.
-        At the end of Phase 1, therefore, your payoff was {{70|c}}.</p>
+        At the end of the transfer phase, therefore, your payoff was {{70|c}}.</p>
     {% endif %}
 {% else %}
     {% if matching_staghunt_action == 1 %}
-        <p>In Phase 1, you chose not to transfer {{30|c}} to the group project, but the other person did. The group
+        <p>In the transfer phase, you chose not to transfer {{30|c}} to the group project, but the other person did. The group
         project was unsuccessful, and so the points in the group project were lost.
-        At the end of Phase 1, therefore, your payoff was {{100|c}}.</p>
+        At the end of the transfer phase, therefore, your payoff was {{100|c}}.</p>
     {% elif matching_staghunt_action == 0 %}
-        <p>In Phase 1, both people chose not to transfer {{30|c}} to the group project.
-        At the end of Phase 1, therefore, your payoff was {{100|c}}.</p>
+        <p>In the transfer phase, both people chose not to transfer {{30|c}} to the group project.
+        At the end of the transfer phase, therefore, your payoff was {{100|c}}.</p>
     {% endif %}
 {% endif %}
 {% if matching_staghunt_action == 1 %}
     {% if staghunt2 > 0 %}
-    <p>In Phase 2, you removed {{staghunt2}} from the other person for their choice in Phase 1.
+    <p>In the penalty phase, you removed {{staghunt2}} from the other person for their choice in the transfer phase.
     This cost you {{staghunt2_cost}}.</p>
     {% else %}
-    <p>You did not remove any points from the other person for their choice in Phase 1.</p>
+    <p>You did not remove any points from the other person for their choice in the transfer phase.</p>
     {% endif %}
 {% elif matching_staghunt_action == 0 %}
     {% if staghunt3 > 0 %}
-    <p>In Phase 2, you removed {{staghunt3}} from the other person for their choice in Phase 1.
+    <p>In the penalty phase, you removed {{staghunt3}} from the other person for their choice in the transfer phase.
     This cost you {{staghunt3_cost}}.</p>
     {% else %}
-    <p>You did not remove any points from the other person for their choice in Phase 1.</p>
+    <p>You did not remove any points from the other person for their choice in the transfer phase.</p>
     {% endif %}
 {% endif %}
 {% if staghunt1 == 1 %}
