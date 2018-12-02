@@ -354,8 +354,10 @@ class Player(BasePlayer):
 
     bank_details_cleartext = models.StringField(
         label="Please enter your NZ bank account number. We will transfer your reimbursement into this account, so please "
-              "make sure it is correct. Please enter it in the following format: 00-0000-0000000-000. You may need to "
-              "add a leading zero to the last three digits.")
+              "make sure it is correct. Please enter it in the following format: 00-0000-0000000-000. This is two "
+              "numbers, followed by four numbers, followed by seven numbers, followed by three numbers. Dashes are "
+              "required between the numbers. If your bank account number ends with two digits, you will need to add "
+              "a leading zero (for example, 12 becomes 012).")
     bank_details_encrypted = djmodels.BinaryField(null=True)
 
     correct_details = models.IntegerField(

@@ -1,0 +1,25 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Thank you for waiting!
+{% endblock %}
+
+{% block content %}
+
+<p>
+    Thank you for your patience! Everyone in the session has now completed the tasks (or time ran out).
+</p>
+<p>
+    We have taken the decisions you made in all 8 tasks, and we've matched them with the decisions of other real
+    NZAVS participants to determine how much money you (and they) earned.
+</p>
+<p>
+    Please click Next to learn the outcome of this matching.
+</p>
+
+{% next_button %}
+
+{% endblock %}
+
+

@@ -15,7 +15,7 @@ def vars_for_all_templates(self):
 
 
 class BasePage(Page):
-    timer_text = 'Time remaining in session:'
+    timer_text = 'Please complete all 8 tasks within this time:'
 
     def get_timeout_seconds(self):
         return self.participant.vars['expiry'] - time.time()
@@ -55,6 +55,8 @@ class secondpp2(BasePage):
     form_model = 'player'
     form_fields = ['secondpp2','secondpp3']
 
+
+class secondppFinal(BasePage):
     def before_next_page(self):
         self.participant.vars['game_number'] += 1
         self.participant.vars['secondpp1'] = self.player.secondpp1
@@ -69,5 +71,6 @@ page_sequence = [
     secondppComp,
     secondppComp2,
     secondpp1,
-    secondpp2
+    secondpp2,
+    secondppFinal
 ]

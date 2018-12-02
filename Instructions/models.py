@@ -89,5 +89,6 @@ class Group(BaseGroup):
 
 class Player(BasePlayer):
     sequence_of_apps = models.LongStringField()
-    reenterlabel = models.StringField(label='Please re-enter your participant label below. '
-                                            'This can be found in your original email.')
+    reenterlabel = models.StringField(label='Please re-enter your confidential participant number below. '
+                                            'This can be found in your original email. It should be in the form '
+                                            'AAA11 (three capital letters and two numbers).')

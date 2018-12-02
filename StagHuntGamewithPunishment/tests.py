@@ -15,5 +15,5 @@ class PlayerBot(Bot):
         yield (pages.staghuntpunComp2)
         yield (pages.staghuntpun1, {'staghunt1': random.randint(0, 1)})
         yield (pages.staghuntpun2, {'staghunt2': random.randint(1, 50),
-                                 'staghunt3': random.randint(1, 50),
-                                 })
+                                    'staghunt3': random.randint(1, 50)})
+        yield (pages.staghuntpunFinal)

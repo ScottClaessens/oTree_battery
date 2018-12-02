@@ -148,7 +148,7 @@ SESSION_CONFIGS = [
                          'Payoffs'],
         'use_browser_bots': False,
         'randomisation': False,
-        'timer': 50
+        'timer': 55
     }
 ]
 

@@ -71,7 +71,7 @@ class ReEnterLabel(Page):
     form_model = 'player'
     form_fields = ['reenterlabel']
 
-    timer_text = 'Time remaining in session:'
+    timer_text = 'Please complete all 8 tasks within this time:'
 
     def get_timeout_seconds(self):
         return self.participant.vars['expiry'] - time.time()
@@ -87,8 +87,8 @@ class ReEnterLabel(Page):
         if value is not None:
             pattern = re.compile("^[A-Z]{3}[0-9]{2}$")
             if pattern.match(value) is None:
-                return "That doesn't look right. Your participant label should be in the format AAA11. " \
-                       "Please try again."
+                return "That doesn't look right. Your confidential participant number should be in the format AAA11 " \
+                       "(three capital letters and two numbers). Please try again."
 
     def is_displayed(self):
         #
@@ -123,7 +123,7 @@ class ReEnterLabel(Page):
 
 
 class Consent(Page):
-    timer_text = 'Time remaining in session:'
+    timer_text = 'Please complete all 8 tasks within this time:'
 
     def get_timeout_seconds(self):
         return self.participant.vars['expiry'] - time.time()
@@ -141,7 +141,7 @@ class Consent(Page):
 
 
 class Instructions(Page):
-    timer_text = 'Time remaining in session:'
+    timer_text = 'Please complete all 8 tasks within this time:'
 
     def get_timeout_seconds(self):
         return self.participant.vars['expiry'] - time.time()
@@ -159,7 +159,7 @@ class Instructions(Page):
 
 
 class BeginTasks(Page):
-    timer_text = 'Time remaining in session:'
+    timer_text = 'Please complete all 8 tasks within this time:'
 
     def get_timeout_seconds(self):
         return self.participant.vars['expiry'] - time.time()

@@ -15,7 +15,7 @@ def vars_for_all_templates(self):
 
 
 class BasePage(Page):
-    timer_text = 'Time remaining in session:'
+    timer_text = 'Please complete all 8 tasks within this time:'
 
     def get_timeout_seconds(self):
         return self.participant.vars['expiry'] - time.time()
@@ -50,6 +50,8 @@ class pggDecision(BasePage):
     form_model = 'player'
     form_fields = ['pgg']
 
+
+class pggFinal(BasePage):
     def before_next_page(self):
         self.participant.vars['game_number'] += 1
         self.participant.vars['pgg'] = self.player.pgg
@@ -61,5 +63,6 @@ page_sequence = [
     pggIntro,
     pggComp,
     pggComp2,
-    pggDecision
+    pggDecision,
+    pggFinal
 ]

@@ -22,6 +22,11 @@ class CalculateWaitPage(CustomMturkWaitPage):
         self.subsession.shuffle_groups_and_calculate_payoffs()
 
 
+class ThanksForWaiting(Page):
+    def is_displayed(self):
+        return not self.player.timeout_happened and not self.player.simulated
+
+
 class Payoffs(Page):
     def is_displayed(self):
         return not self.player.timeout_happened and not self.player.simulated
@@ -37,7 +42,7 @@ class TimeoutHappened(Page):
 
 class Payment(Page):
     form_model = 'player'
-    form_fields = ['first_name_cleartext','last_name_cleartext','bank_details_cleartext']
+    form_fields = ['first_name_cleartext', 'last_name_cleartext', 'bank_details_cleartext']
 
     def is_displayed(self):
         return not self.player.simulated
@@ -113,8 +118,8 @@ class ReEnterLabel(Page):
         if value is not None:
             pattern = re.compile("^[A-Z]{3}[0-9]{2}$")
             if pattern.match(value) is None:
-                return "That doesn't look right. Your participant label should be in the format AAA11. " \
-                       "Please try again."
+                return "That doesn't look right. Your participant label should be in the format AAA11 " \
+                       "(three capital letters and two numbers). Please try again."
 
     def before_next_page(self):
         self.player.overall_time_spent = int(time.time() - self.participant.vars['start.time'])
@@ -133,8 +138,8 @@ class ReEnterLabel2(Page):
         if value is not None:
             pattern = re.compile("^[A-Z]{3}[0-9]{2}$")
             if pattern.match(value) is None:
-                return "That doesn't look right. Your participant label should be in the format AAA11. " \
-                       "Please try again."
+                return "That doesn't look right. Your participant label should be in the format AAA11 " \
+                       "(three capital letters and two numbers). Please try again."
 
 
 class Final(Page):
@@ -143,6 +148,7 @@ class Final(Page):
 
 page_sequence = [
     CalculateWaitPage,
+    ThanksForWaiting,
     Payoffs,
     TimeoutHappened,
     Payment,

@@ -1,0 +1,22 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree %}
+
+{% block title %}
+    Task {{game_number}} of 8
+{% endblock %}
+
+{% block content %}
+
+<p>
+    Thank you, your decision(s) for this task have been saved. After all 8 tasks are completed, your decisions will
+    be matched with the decisions of other real NZAVS participants.
+</p>
+<p>
+    Remember, the points in these tasks are being converted to <b>real money</b> that you will earn after the study is over.
+</p>
+<p>
+    Please click Next to continue.
+</p>
+
+{% next_button %}
+{% endblock %}

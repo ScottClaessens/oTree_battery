@@ -13,5 +13,5 @@ class PlayerBot(Bot):
             yield (pages.thirdppComp, {'comprehension': 2})
         yield (pages.thirdppComp2)
         yield (pages.thirdpp1, {'thirdpp1': random.randint(0, 1)})
-        yield (pages.thirdpp2, {'thirdpp2': c(random.randint(1,100))})
-
+        yield (pages.thirdpp2, {'thirdpp2': c(random.randint(1, 100))})
+        yield (pages.thirdppFinal)

@@ -10,6 +10,7 @@ class PlayerBot(Bot):
         # f = open(file_name, 'w')
         # f.write(self.html)
         # f.close()
+        yield (pages.ThanksForWaiting)
         yield (pages.Payoffs)
         yield SubmissionMustFail(pages.Payment, {'first_name_cleartext': 'Scott',
                                                  'last_name_cleartext': 'Claessens',
