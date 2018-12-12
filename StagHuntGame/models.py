@@ -32,9 +32,9 @@ class Player(BasePlayer):
         label="If you contribute 30 points to the group project, but no one else does, how many points do you end "
               "this task with?",
         choices=[
-            [1, '130 points (100 start + 30)'],
-            [2, '100 points (100 start + 0)'],
-            [3, '70 points (100 start - 30)']],
+            [1, '80 points (50 start + 30)'],
+            [2, '50 points (50 start + 0)'],
+            [3, '20 points (50 start - 30)']],
         widget=widgets.RadioSelect
     )
 

@@ -278,12 +278,12 @@ class Subsession(BaseSubsession):
             for p in g.get_players():
                 p.participant.vars['matching_sh_count'] = i
                 if i == 4:
-                    payoff = c(130)
+                    payoff = c(80)
                 else:
                     if p.participant.vars['sh'] == 1:
-                        payoff = c(70)
+                        payoff = c(20)
                     else:
-                        payoff = c(100)
+                        payoff = c(50)
                 p.participant.vars['matching_sh_payoff'] = payoff
                 p.participant.payoff += payoff
 
